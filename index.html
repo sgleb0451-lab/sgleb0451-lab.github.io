@@ -4,11 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Глеб | Автомеханик · 3D · Фондовый рынок</title>
-  <!-- Подключаем современный шрифт -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 для иконок -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     * {
@@ -26,14 +24,12 @@
       overflow-x: hidden;
     }
 
-    /* Плавные тени и свечения — основа стиля */
     .container {
       max-width: 1300px;
       margin: 0 auto;
       padding: 0 2rem;
     }
 
-    /* ---- ЗАГОЛОВОК / HERO ---- */
     .hero {
       min-height: 100vh;
       display: flex;
@@ -141,7 +137,6 @@
       100% { transform: translateY(0); }
     }
 
-    /* ---- СЕКЦИИ ---- */
     section {
       padding: 5rem 0;
       position: relative;
@@ -179,7 +174,6 @@
       box-shadow: 0 0 18px #2563eb;
     }
 
-    /* Сетка карточек */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -232,7 +226,6 @@
       margin-top: -0.3rem;
     }
 
-    /* Профессия отдельно */
     .profession-highlight {
       background: linear-gradient(120deg, rgba(30,50,80,0.8), rgba(20,28,45,0.9));
       border-left: 5px solid #3b82f6;
@@ -251,7 +244,6 @@
       color: #608bff;
     }
 
-    /* списки хобби */
     .hobby-list {
       display: flex;
       flex-wrap: wrap;
@@ -284,7 +276,6 @@
       box-shadow: 0 10px 18px rgba(0,140,255,0.25);
     }
 
-    /* подвал */
     .footer {
       text-align: center;
       padding: 3rem 1rem 2.5rem;
@@ -300,7 +291,6 @@
       margin: 1.5rem 0;
     }
 
-    /* Адаптив */
     @media (max-width: 650px) {
       .container {
         padding: 0 1.2rem;
@@ -321,8 +311,8 @@
     <!-- HERO -->
     <div class="hero">
       <div class="avatar-placeholder" style="background: transparent; box-shadow: 0 25px 45px -10px rgba(0, 180, 255, 0.35), 0 0 0 3px rgba(255,255,255,0.15); overflow: hidden; padding: 0; width: 180px; height: 180px;">
-  <img src="avatar.jpg" alt="Глеб" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;">
-</div>
+        <img src="avatar.jpg" alt="Глеб" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;">
+      </div>
       <h1>Глеб</h1>
       <div class="location">
         <i class="fas fa-map-pin"></i> Нижний Тагил
@@ -419,7 +409,7 @@
       </div>
     </section>
 
-        <!-- 3D И ТВОРЧЕСТВО -->
+    <!-- 3D И ТВОРЧЕСТВО -->
     <section>
       <div class="section-title">
         <i class="fas fa-project-diagram"></i> 3D мир &amp; визуал
@@ -477,7 +467,7 @@
       </div>
     </section>
 
-        <!-- КОНТАКТНАЯ ИНФОРМАЦИЯ -->
+    <!-- КОНТАКТНАЯ ИНФОРМАЦИЯ -->
     <section style="padding-bottom: 2rem;">
       <div class="section-title">
         <i class="fas fa-address-card"></i> Связь и контакты
@@ -512,147 +502,123 @@
       <p style="margin-top: 0.7rem;"><i class="fas fa-map-pin"></i> Нижний Тагил · Создаю будущее своими руками</p>
     </div>
   </div>
-</body>
 
-    <!-- МОДАЛКА: ГАЛЕРЕЯ -->
-    <div id="galleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
-      <div style="max-width: 1200px; margin: 0 auto; position: relative;">
-        <button onclick="closeGallery()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10; transition: 0.3s;"
-          onmouseover="this.style.background='rgba(255,255,255,0.2)'" 
-          onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-          &times;
-        </button>
-        <h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2.5rem; font-weight: 600;">
-          <i class="fas fa-images" style="color: #4d8eff; margin-right: 0.7rem;"></i>Мои фотографии
-        </h2>
-        <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding-bottom: 3rem;">
-        </div>
+  <!-- МОДАЛКА: ГАЛЕРЕЯ -->
+  <div id="galleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
+    <div style="max-width: 1200px; margin: 0 auto; position: relative;">
+      <button onclick="closeGallery()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10; transition: 0.3s;"
+        onmouseover="this.style.background='rgba(255,255,255,0.2)'" 
+        onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+        &times;
+      </button>
+      <h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2.5rem; font-weight: 600;">
+        <i class="fas fa-images" style="color: #4d8eff; margin-right: 0.7rem;"></i>Мои фотографии
+      </h2>
+      <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding-bottom: 3rem;">
       </div>
     </div>
-
   </div>
 
-    <!-- МОДАЛКА: ГАЛЕРЕЯ -->
-    <div id="galleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
-      <div style="max-width: 1200px; margin: 0 auto; position: relative;">
-        <button onclick="closeGallery()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10; transition: 0.3s;"
-          onmouseover="this.style.background='rgba(255,255,255,0.2)'" 
-          onmouseout="this.style.background='rgba(255,255,255,0.1)'">
-          &times;
-        </button>
-        <h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2.5rem; font-weight: 600;">
-          <i class="fas fa-images" style="color: #4d8eff; margin-right: 0.7rem;"></i>Мои фотографии
-        </h2>
-        <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding-bottom: 3rem;">
-        </div>
-      </div>
+  <!-- МОДАЛКА: ПРОДАЖИ -->
+  <div id="salesModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
+    <div style="background: rgba(20,25,38,0.95); backdrop-filter: blur(25px); border-radius: 3rem; padding: 3.5rem 2.5rem; max-width: 550px; width: 100%; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.08); position: relative;">
+      <button onclick="closeSales()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.08); border: none; color: #aaa; font-size: 2rem; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: 0.3s;"
+        onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.15)'" 
+        onmouseout="this.style.color='#aaa'; this.style.background='rgba(255,255,255,0.08)'">
+        &times;
+      </button>
+      <i class="fas fa-smile-wink" style="font-size: 4.5rem; color: #ffb84d; margin-bottom: 1.5rem; filter: drop-shadow(0 0 25px rgba(255,180,70,0.5));"></i>
+      <h3 style="font-size: 2rem; color: #f0f6ff; margin-bottom: 1rem;">Пока ничего не продано</h3>
+      <p style="color: #b4c4dd; font-size: 1.15rem; line-height: 1.6;">
+        Я не продал ещё ни одной фотографии, но скоро обязательно продам! 😊
+      </p>
+      <p style="color: #7b8ca8; margin-top: 1.2rem; font-size: 0.95rem;">
+        Следи за обновлениями — здесь появятся платформа и цена.
+      </p>
     </div>
+  </div>
 
-    <!-- МОДАЛКА: ПРОДАЖИ -->
-    <div id="salesModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
-      <div style="background: rgba(20,25,38,0.95); backdrop-filter: blur(25px); border-radius: 3rem; padding: 3.5rem 2.5rem; max-width: 550px; width: 100%; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.08); position: relative;">
-        <button onclick="closeSales()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.08); border: none; color: #aaa; font-size: 2rem; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: 0.3s;"
-          onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.15)'" 
-          onmouseout="this.style.color='#aaa'; this.style.background='rgba(255,255,255,0.08)'">
-          &times;
-        </button>
-        <i class="fas fa-smile-wink" style="font-size: 4.5rem; color: #ffb84d; margin-bottom: 1.5rem; filter: drop-shadow(0 0 25px rgba(255,180,70,0.5));"></i>
-        <h3 style="font-size: 2rem; color: #f0f6ff; margin-bottom: 1rem;">Пока ничего не продано</h3>
-        <p style="color: #b4c4dd; font-size: 1.15rem; line-height: 1.6;">
-          Я не продал ещё ни одной фотографии, но скоро обязательно продам! 😊
-        </p>
-        <p style="color: #7b8ca8; margin-top: 1.2rem; font-size: 0.95rem;">
-          Следи за обновлениями — здесь появятся платформа и цена.
-        </p>
-      </div>
-    </div>
+  <script>
+    const photos = [
+      "100004170.jpg", "1000005750.jpg", "1000004179.jpg", "1000005761.jpg",
+      "1000004174.jpg", "1000004097.jpg", "1000004163.jpg", "1000004161.jpg",
+      "1000005749.jpg", "1000005764.jpg", "1000004165.jpg", "1000004162.jpg",
+      "1000004167.jpg", "1000005760.jpg", "1000004100.jpg", "1000004164.jpg",
+      "1000004169.jpg", "1000004171.jpg", "1000004166.jpg", "1000005763.jpg",
+      "1000004168.jpg", "1000004184.jpg", "1000004178.jpg"
+    ];
 
-    <script>
-      // Список твоих фотографий (имена файлов как есть)
-      const photos = [
-        "100004170.jpg", "1000005750.jpg", "1000004179.jpg", "1000005761.jpg",
-        "1000004174.jpg", "1000004097.jpg", "1000004163.jpg", "1000004161.jpg",
-        "1000005749.jpg", "1000005764.jpg", "1000004165.jpg", "1000004162.jpg",
-        "1000004167.jpg", "1000005760.jpg", "1000004100.jpg", "1000004164.jpg",
-        "1000004169.jpg", "1000004171.jpg", "1000004166.jpg", "1000005763.jpg",
-        "1000004168.jpg", "1000004184.jpg", "1000004178.jpg"
-      ];
-
-      function openGallery() {
-        const modal = document.getElementById('galleryModal');
-        const grid = document.getElementById('galleryGrid');
+    function openGallery() {
+      const modal = document.getElementById('galleryModal');
+      const grid = document.getElementById('galleryGrid');
+      
+      grid.innerHTML = '';
+      
+      photos.forEach(photo => {
+        const card = document.createElement('div');
+        card.style.cssText = `
+          background: rgba(255,255,255,0.03);
+          border-radius: 1.5rem;
+          overflow: hidden;
+          box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+          transition: transform 0.35s ease, box-shadow 0.35s ease;
+          cursor: pointer;
+          border: 1px solid rgba(255,255,255,0.05);
+        `;
+        card.onmouseover = function() {
+          this.style.transform = 'scale(1.03)';
+          this.style.boxShadow = '0 20px 45px rgba(0,160,255,0.35)';
+        };
+        card.onmouseout = function() {
+          this.style.transform = 'scale(1)';
+          this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.5)';
+        };
         
-        grid.innerHTML = '';
+        card.innerHTML = `
+          <div style="width: 100%; height: 260px; overflow: hidden; background: #0d1117;">
+            <img src="${photo}" alt="Фото" style="width: 100%; height: 100%; object-fit: cover; display: block;"
+              onerror="this.parentElement.innerHTML='<div style=\\'height:260px;display:flex;align-items:center;justify-content:center;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;\\'></i></div>'">
+          </div>
+          <div style="padding: 0.9rem 1.2rem; color: #8b9cbb; font-size: 0.85rem; text-align: center;">
+            ${photo}
+          </div>
+        `;
         
-        photos.forEach(photo => {
-          const card = document.createElement('div');
-          card.style.cssText = `
-            background: rgba(255,255,255,0.03);
-            border-radius: 1.5rem;
-            overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-            transition: transform 0.35s ease, box-shadow 0.35s ease;
-            cursor: pointer;
-            border: 1px solid rgba(255,255,255,0.05);
-          `;
-          card.onmouseover = function() {
-            this.style.transform = 'scale(1.03)';
-            this.style.boxShadow = '0 20px 45px rgba(0,160,255,0.35)';
-          };
-          card.onmouseout = function() {
-            this.style.transform = 'scale(1)';
-            this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.5)';
-          };
-          
-          card.innerHTML = `
-            <div style="width: 100%; height: 260px; overflow: hidden; background: #0d1117;">
-              <img src="${photo}" alt="Фото" style="width: 100%; height: 100%; object-fit: cover; display: block;"
-                onerror="this.parentElement.innerHTML='<div style=\\'height:260px;display:flex;align-items:center;justify-content:center;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;\\'></i></div>'">
-            </div>
-            <div style="padding: 0.9rem 1.2rem; color: #8b9cbb; font-size: 0.85rem; text-align: center;">
-              ${photo}
-            </div>
-          `;
-          
-          card.onclick = function(e) {
-            const img = this.querySelector('img');
-            if (img && img.src) {
-              window.open(img.src, '_blank');
-            }
-          };
-          
-          grid.appendChild(card);
-        });
+        card.onclick = function(e) {
+          const img = this.querySelector('img');
+          if (img && img.src) {
+            window.open(img.src, '_blank');
+          }
+        };
         
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeGallery() {
-        document.getElementById('galleryModal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-      }
-
-      function openSales() {
-        document.getElementById('salesModal').style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-      }
-
-      function closeSales() {
-        document.getElementById('salesModal').style.display = 'none';
-        document.body.style.overflow = 'auto';
-      }
-
-      // Закрытие по клику на фон
-      document.getElementById('galleryModal').addEventListener('click', function(e) {
-        if (e.target === this) closeGallery();
+        grid.appendChild(card);
       });
-      document.getElementById('salesModal').addEventListener('click', function(e) {
-        if (e.target === this) closeSales();
-      });
+      
+      modal.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+    }
 
-    </script>
+    function closeGallery() {
+      document.getElementById('galleryModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    function openSales() {
+      document.getElementById('salesModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSales() {
+      document.getElementById('salesModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    document.getElementById('galleryModal').addEventListener('click', function(e) {
+      if (e.target === this) closeGallery();
+    });
+    document.getElementById('salesModal').addEventListener('click', function(e) {
+      if (e.target === this) closeSales();
+    });
+  </script>
 </body>
-</html>  
-    </script>
 </html>
