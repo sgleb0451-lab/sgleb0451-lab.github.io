@@ -45,27 +45,16 @@
     .avatar-placeholder {
       width: 180px;
       height: 180px;
-      background: linear-gradient(135deg, #3a4a5c, #1f2a36);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 2rem;
-      box-shadow: 0 25px 45px -10px rgba(0, 180, 255, 0.25), 0 0 0 2px rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(10px);
       transition: transform 0.4s ease, box-shadow 0.4s ease;
-    }
-
-    .avatar-placeholder i {
-      font-size: 5rem;
-      color: #b7cdff;
-      filter: drop-shadow(0 8px 12px rgba(0,160,255,0.4));
-      transition: transform 0.3s;
     }
 
     .avatar-placeholder:hover {
       transform: scale(1.03);
-      box-shadow: 0 30px 55px -10px rgba(0, 200, 255, 0.4), 0 0 0 3px rgba(255,255,255,0.15);
     }
 
     .hero h1 {
@@ -333,7 +322,7 @@
       </div>
     </div>
 
-       <!-- ХОББИ И ИНТЕРЕСЫ -->
+    <!-- ХОББИ И ИНТЕРЕСЫ -->
     <section>
       <div class="section-title">
         <i class="fas fa-gamepad"></i> Хобби &amp; увлечения
@@ -353,8 +342,8 @@
           <h3>Фотография</h3>
           <p>Красивые снимки на фотик: природа, urban, портреты. Ловлю свет и тени.</p>
           <div class="hobby-list">
-            <span class="hobby-tag"><i class="fas fa-image"></i> Кадры</span>
-            <span class="hobby-tag"><i class="fas fa-sun"></i> Свет</span>
+            <span class="hobby-tag" onclick="openGallery()" style="cursor: pointer;"><i class="fas fa-image"></i> Кадры</span>
+            <span class="hobby-tag" onclick="openSales()" style="cursor: pointer;"><i class="fas fa-tag"></i> Продажи</span>
           </div>
         </div>
         <div class="card">
@@ -440,22 +429,6 @@
           <div class="card-icon"><i class="fas fa-print"></i></div>
           <h3>3D печать</h3>
           <p>Переношу цифровые модели в реальность. Прототипы запчастей и креативные проекты.</p>
-        </div>
-        <div class="card" onclick="openGallery()" style="cursor: pointer;">
-          <div class="card-icon"><i class="fas fa-image"></i></div>
-          <h3>Кадры</h3>
-          <p>Мои лучшие снимки. Нажми, чтобы посмотреть галерею.</p>
-          <div class="hobby-list">
-            <span class="hobby-tag"><i class="fas fa-camera"></i> Смотреть фото</span>
-          </div>
-        </div>
-        <div class="card" onclick="openSales()" style="cursor: pointer;">
-          <div class="card-icon"><i class="fas fa-tag"></i></div>
-          <h3>Продажи</h3>
-          <p>Здесь появляются проданные фотографии, платформа и цена.</p>
-          <div class="hobby-list">
-            <span class="hobby-tag"><i class="fas fa-coins"></i> История продаж</span>
-          </div>
         </div>
       </div>
     </section>
