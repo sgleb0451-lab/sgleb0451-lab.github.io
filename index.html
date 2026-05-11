@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>fhdsdhgfhdbcbebcyrbfjv
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Глеб | Автомеханик · 3D · Фондовый рынок</title>
@@ -32,7 +32,7 @@
 
     .hero {
       min-height: 100vh;
-      display: flex;dvgffghrrhdbcvbfhbcvgxcbfhxnvcbfhfbbredbcc 
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -54,12 +54,7 @@
     }
 
     .avatar-placeholder:hover {
-      transform: scadfebebcbfbrgh;glhhkymb
-      
-      
-      
-      
-      hbfrfrbddxjsdndnfnbfehfgjghdfnbcgfhvbssd nznbyr uewusifkgh ehecerbfh le(1.03);
+      transform: scale(1.03);
     }
 
     .hero h1 {
@@ -285,6 +280,49 @@
       margin: 1.5rem 0;
     }
 
+    /* Стили для увеличенного фото */
+    #photoViewer {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    #photoViewer img {
+      max-width: 90%;
+      max-height: 90%;
+      object-fit: contain;
+      border-radius: 1rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    }
+
+    #photoViewer .close-viewer {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 10001;
+      transition: 0.3s;
+    }
+
+    #photoViewer .close-viewer:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
     @media (max-width: 650px) {
       .container {
         padding: 0 1.2rem;
@@ -333,15 +371,17 @@
         <i class="fas fa-gamepad"></i> Хобби &amp; увлечения
       </div>
       <div class="grid">
+        <!-- ПК игры -->
         <div class="card">
           <div class="card-icon"><i class="fas fa-desktop"></i></div>
           <h3>ПК игры</h3>
-          <p>Киберспорт, стратегии, RPG. Игровой сетап и постоянный апгрейд железа — часть жизни.</p>
+          <p>Киберспорт, стратегии. Игровой сетап для побед.</p>
           <div class="hobby-list">
-            <span class="hobby-tag"><i class="fas fa-headset"></i> Онлайн</span>
-            <span class="hobby-tag"><i class="fas fa-microchip"></i> Сборки</span>
+            <span class="hobby-tag" onclick="openShooters()" style="cursor: pointer;"><i class="fas fa-crosshairs"></i> Шутеры</span>
+            <span class="hobby-tag" onclick="openSetup()" style="cursor: pointer;"><i class="fas fa-microchip"></i> Игровой сетап</span>
           </div>
         </div>
+        <!-- Фотография -->
         <div class="card">
           <div class="card-icon"><i class="fas fa-camera-retro"></i></div>
           <h3>Фотография</h3>
@@ -351,22 +391,42 @@
             <span class="hobby-tag" onclick="openSales()" style="cursor: pointer;"><i class="fas fa-tag"></i> Продажи</span>
           </div>
         </div>
+        <!-- 3D моделирование -->
         <div class="card">
           <div class="card-icon"><i class="fas fa-cube"></i></div>
           <h3>3D моделирование</h3>
           <p>Создаю детали, объекты, экспериментирую с формами. Blender и не только.</p>
           <div class="hobby-list">
-            <span class="hobby-tag"><i class="fas fa-shapes"></i> Рендер</span>
-            <span class="hobby-tag"><i class="fas fa-drafting-compass"></i> Дизайн</span>
+            <span class="hobby-tag"><i class="fas fa-paint-brush"></i> Дизайн</span>
+            <span class="hobby-tag"><i class="fas fa-shopping-cart"></i> Продажа</span>
           </div>
         </div>
+        <!-- Фондовый рынок -->
         <div class="card">
           <div class="card-icon"><i class="fas fa-chart-line"></i></div>
           <h3>Фондовый рынок</h3>
           <p>Изучаю акции, облигации, ETF. Анализирую графики и новости компаний.</p>
           <div class="hobby-list">
-            <span class="hobby-tag"><i class="fas fa-chart-pie"></i> Аналитика</span>
-            <span class="hobby-tag"><i class="fas fa-globe"></i> NYSE</span>
+            <a href="https://www.tbank.ru/invest/social/profile/ANADE?author=profile" target="_blank" class="hobby-tag" style="text-decoration: none; cursor: pointer;"><i class="fas fa-broadcast-tower"></i> Пульс</a>
+            <span class="hobby-tag"><i class="fas fa-globe"></i> MOEX</span>
+          </div>
+        </div>
+        <!-- Кадры -->
+        <div class="card" onclick="openGallery()" style="cursor: pointer;">
+          <div class="card-icon"><i class="fas fa-images"></i></div>
+          <h3>Кадры</h3>
+          <p>Мои лучшие снимки. Нажми, чтобы посмотреть галерею.</p>
+          <div class="hobby-list">
+            <span class="hobby-tag"><i class="fas fa-camera"></i> Смотреть фото</span>
+          </div>
+        </div>
+        <!-- Продажи -->
+        <div class="card" onclick="openSales()" style="cursor: pointer;">
+          <div class="card-icon"><i class="fas fa-tag"></i></div>
+          <h3>Продажи</h3>
+          <p>Здесь появляются проданные фотографии, платформа и цена.</p>
+          <div class="hobby-list">
+            <span class="hobby-tag"><i class="fas fa-coins"></i> История продаж</span>
           </div>
         </div>
       </div>
@@ -382,11 +442,9 @@
           <div class="card" style="height: 100%;">
             <div class="card-icon"><i class="fas fa-car"></i></div>
             <h3>Автомеханик</h3>
-            <p style="margin-bottom: 0.5rem;">Специальность в процессе обучения. Разбираюсь в двигателях, ходовой, диагностике.</p>
+            <p style="margin-bottom: 0.5rem;">Специальность в процессе обучения.</p>
             <div class="hobby-list">
-              <span class="hobby-tag"><i class="fas fa-tools"></i> Ремонт</span>
-              <span class="hobby-tag"><i class="fas fa-oil-can"></i> ТО</span>
-              <span class="hobby-tag"><i class="fas fa-laptop-code"></i> Электроника</span>
+              <span class="hobby-tag"><i class="fas fa-star"></i> Культура GDM</span>
             </div>
           </div>
         </div>
@@ -394,10 +452,6 @@
           <div style="background: rgba(255,255,255,0.02); border-radius: 2rem; padding: 2rem; backdrop-filter: blur(12px);">
             <i class="fas fa-quote-right" style="font-size: 2rem; color: #3b6cb7; opacity: 0.8;"></i>
             <p class="quote">«С детства крутил гайки, теперь превращаю хобби в профессию. Техника для меня — искусство.»</p>
-            <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-              <span style="background:#1e2b41; padding:0.4rem 1.2rem; border-radius: 30px;"><i class="fas fa-check-circle" style="color:#4d8eff;"></i> Диагностика</span>
-              <span style="background:#1e2b41; padding:0.4rem 1.2rem; border-radius: 30px;"><i class="fas fa-check-circle" style="color:#4d8eff;"></i> Подвеска</span>
-            </div>
           </div>
         </div>
       </div>
@@ -415,9 +469,9 @@
           <p>Моделирую механические детали, окружение, иногда персонажей. Работаю с текстурами и светом.</p>
         </div>
         <div class="card">
-          <div class="card-icon"><i class="fas fa-print"></i></div>
-          <h3>3D печать</h3>
-          <p>Переношу цифровые модели в реальность. Прототипы запчастей и креативные проекты.</p>
+          <div class="card-icon"><i class="fas fa-cubes"></i></div>
+          <h3>3D моделирование</h3>
+          <p>Создаю трёхмерные объекты для игр, печати и визуализаций.</p>
         </div>
       </div>
     </section>
@@ -437,10 +491,6 @@
           <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
           <h3>Практика</h3>
           <p>Виртуальный портфель, дневник сделок. Разбираюсь в рисках и диверсификации.</p>
-          <div class="hobby-list">
-            <span class="hobby-tag"><i class="fas fa-percent"></i> Доходность</span>
-            <span class="hobby-tag"><i class="fas fa-shield-alt"></i> Риск-менеджмент</span>
-          </div>
         </div>
       </div>
     </section>
@@ -481,6 +531,65 @@
     </div>
   </div>
 
+  <!-- ПРОСМОТР ФОТО (увеличение) -->
+  <div id="photoViewer">
+    <button class="close-viewer" onclick="closePhotoViewer()">&times;</button>
+    <img id="photoViewerImg" src="" alt="Фото">
+  </div>
+
+  <!-- МОДАЛКА: ШУТЕРЫ -->
+  <div id="shootersModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
+    <div style="max-width: 800px; width: 100%; text-align: center; position: relative;">
+      <button onclick="closeShooters()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10; transition: 0.3s;"
+        onmouseover="this.style.background='rgba(255,255,255,0.2)'" 
+        onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+        &times;
+      </button>
+      <h2 style="color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2rem; font-weight: 600;">
+        <i class="fas fa-crosshairs" style="color: #4d8eff; margin-right: 0.7rem;"></i>Шутеры
+      </h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
+        <!-- Valorant -->
+        <div onclick="window.open('https://tracker.gg/valorant/profile/riot/ANADE%23ANADE/overview?platform=pc&playlist=unrated&season=ce2783e8-44fc-dd48-3da3-33b5ba6c4a22', '_blank')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.5); transition: transform 0.35s ease; border: 1px solid rgba(255,255,255,0.05); width: 300px;"
+          onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="width: 100%; height: 200px; overflow: hidden; background: #0d1117;">
+            <img src="valorant.jpg" alt="Valorant" style="width: 100%; height: 100%; object-fit: cover; display: block;"
+              onerror="this.parentElement.innerHTML='<div style=\\'height:200px;display:flex;align-items:center;justify-content:center;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;\\'></i></div>'">
+          </div>
+          <div style="padding: 1rem; color: #f0f6ff; font-weight: 600; font-size: 1.2rem;">Valorant</div>
+        </div>
+        <!-- Apex Legends -->
+        <div onclick="alert('Скоро добавлю ссылку на свой профиль Apex Legends! 🔜')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.5); transition: transform 0.35s ease; border: 1px solid rgba(255,255,255,0.05); width: 300px;"
+          onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="width: 100%; height: 200px; overflow: hidden; background: #0d1117;">
+            <img src="apex.jpg" alt="Apex Legends" style="width: 100%; height: 100%; object-fit: cover; display: block;"
+              onerror="this.parentElement.innerHTML='<div style=\\'height:200px;display:flex;align-items:center;justify-content:center;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;\\'></i></div>'">
+          </div>
+          <div style="padding: 1rem; color: #f0f6ff; font-weight: 600; font-size: 1.2rem;">Apex Legends</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- МОДАЛКА: ИГРОВОЙ СЕТАП -->
+  <div id="setupModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
+    <div style="background: rgba(20,25,38,0.95); backdrop-filter: blur(25px); border-radius: 3rem; padding: 3.5rem 2.5rem; max-width: 550px; width: 100%; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.08); position: relative;">
+      <button onclick="closeSetup()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.08); border: none; color: #aaa; font-size: 2rem; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: 0.3s;"
+        onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.15)'" 
+        onmouseout="this.style.color='#aaa'; this.style.background='rgba(255,255,255,0.08)'">
+        &times;
+      </button>
+      <i class="fas fa-microchip" style="font-size: 4.5rem; color: #ffb84d; margin-bottom: 1.5rem; filter: drop-shadow(0 0 25px rgba(255,180,70,0.5));"></i>
+      <h3 style="font-size: 2rem; color: #f0f6ff; margin-bottom: 1rem;">Мой игровой сетап</h3>
+      <p style="color: #b4c4dd; font-size: 1.15rem; line-height: 1.6;">
+        Скоро добавлю фотографии своих гаджетов с характеристиками и ценами! 🖥️🎮
+      </p>
+      <p style="color: #7b8ca8; margin-top: 1.2rem; font-size: 0.95rem;">
+        ПК, монитор, клавиатура, мышь и общая стоимость сетапа.
+      </p>
+    </div>
+  </div>
+
   <!-- МОДАЛКА: ГАЛЕРЕЯ -->
   <div id="galleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
     <div style="max-width: 1200px; margin: 0 auto; position: relative;">
@@ -517,15 +626,63 @@
   </div>
 
   <script>
+    // Фото без неудачных
     const photos = [
-      "100004170.jpg", "1000005750.jpg", "1000004179.jpg", "1000005761.jpg",
+      "1000005750.jpg", "1000004179.jpg", "1000005761.jpg",
       "1000004174.jpg", "1000004097.jpg", "1000004163.jpg", "1000004161.jpg",
       "1000005749.jpg", "1000005764.jpg", "1000004165.jpg", "1000004162.jpg",
       "1000004167.jpg", "1000005760.jpg", "1000004100.jpg", "1000004164.jpg",
       "1000004169.jpg", "1000004171.jpg", "1000004166.jpg", "1000005763.jpg",
-      "1000004168.jpg", "1000004184.jpg", "1000004178.jpg"
+      "1000004168.jpg"
     ];
 
+    // ----- ПРОСМОТР ФОТО -----
+    function openPhotoViewer(src) {
+      document.getElementById('photoViewerImg').src = src;
+      document.getElementById('photoViewer').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closePhotoViewer() {
+      document.getElementById('photoViewer').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    document.getElementById('photoViewer').addEventListener('click', function(e) {
+      if (e.target === this) closePhotoViewer();
+    });
+
+    // ----- ШУТЕРЫ -----
+    function openShooters() {
+      document.getElementById('shootersModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeShooters() {
+      document.getElementById('shootersModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    document.getElementById('shootersModal').addEventListener('click', function(e) {
+      if (e.target === this) closeShooters();
+    });
+
+    // ----- ИГРОВОЙ СЕТАП -----
+    function openSetup() {
+      document.getElementById('setupModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeSetup() {
+      document.getElementById('setupModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    document.getElementById('setupModal').addEventListener('click', function(e) {
+      if (e.target === this) closeSetup();
+    });
+
+    // ----- ГАЛЕРЕЯ -----
     function openGallery() {
       const modal = document.getElementById('galleryModal');
       const grid = document.getElementById('galleryGrid');
@@ -564,8 +721,8 @@
         
         card.onclick = function(e) {
           const img = this.querySelector('img');
-          if (img && img.src) {
-            window.open(img.src, '_blank');
+          if (img && img.src && !img.src.includes('error')) {
+            openPhotoViewer(img.src);
           }
         };
         
@@ -581,6 +738,11 @@
       document.body.style.overflow = 'auto';
     }
 
+    document.getElementById('galleryModal').addEventListener('click', function(e) {
+      if (e.target === this) closeGallery();
+    });
+
+    // ----- ПРОДАЖИ -----
     function openSales() {
       document.getElementById('salesModal').style.display = 'flex';
       document.body.style.overflow = 'hidden';
@@ -591,9 +753,6 @@
       document.body.style.overflow = 'auto';
     }
 
-    document.getElementById('galleryModal').addEventListener('click', function(e) {
-      if (e.target === this) closeGallery();
-    });
     document.getElementById('salesModal').addEventListener('click', function(e) {
       if (e.target === this) closeSales();
     });
