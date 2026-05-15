@@ -13,21 +13,45 @@
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: radial-gradient(circle at 20% 10%, #1a1e2b, #0b0d14);
-      color: #e8edf2;
-      line-height: 1.5;
-      scroll-behavior: smooth;
-      overflow-x: hidden;
+      color: #e8edf2; line-height: 1.5; scroll-behavior: smooth; overflow-x: hidden;
     }
     .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Приветствие */
+    #greeting {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: #0b0d14; z-index: 99999; display: flex;
+      align-items: center; justify-content: center; flex-direction: column;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+    #greeting.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    #greeting h2 {
+      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; text-align: center;
+      background: linear-gradient(to right, #ffffff, #b4d0ff, #8bb9ff);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 1rem;
+      animation: fadeInUp 0.8s ease;
+    }
+    #greeting p {
+      color: #a0b9da; font-size: 1.2rem; text-align: center;
+      animation: fadeInUp 0.8s ease 0.2s both;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #greeting .loader {
+      width: 50px; height: 50px; border: 3px solid rgba(255,255,255,0.1);
+      border-top: 3px solid #4d8eff; border-radius: 50%;
+      animation: spin 0.8s linear infinite; margin-top: 2rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Hero */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      position: relative;
-      padding: 2rem 1rem;
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; text-align: center;
+      position: relative; padding: 2rem 1rem;
       background: radial-gradient(ellipse at 50% 30%, rgba(45, 55, 80, 0.7) 0%, transparent 70%);
     }
     .avatar-placeholder {
@@ -54,8 +78,12 @@
     .age-badge {
       background: rgba(0, 180, 255, 0.12); border: 1px solid rgba(100, 180, 255, 0.3);
       padding: 0.5rem 1.7rem; border-radius: 40px; font-weight: 500;
-      font-size: 1.2rem; backdrop-filter: blur(12px); margin-bottom: 2.5rem;
+      font-size: 1.2rem; backdrop-filter: blur(12px); margin-bottom: 1rem;
       color: #c6e0ff; box-shadow: 0 8px 20px rgba(0,120,255,0.2);
+    }
+    .hero-desc {
+      max-width: 600px; color: #b4c4dd; font-size: 1.05rem;
+      line-height: 1.6; margin-bottom: 2rem;
     }
     .scroll-hint {
       position: absolute; bottom: 2.5rem; display: flex;
@@ -119,18 +147,30 @@
       border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem;
     }
     .quote { font-style: italic; font-size: 1.15rem; color: #a0b9dd; margin: 1.5rem 0; }
+
+    /* Дым */
+    .smoke-particle {
+      position: fixed; pointer-events: none; z-index: 9998;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%; animation: smokeRise 1.5s ease-out forwards;
+    }
+    @keyframes smokeRise {
+      0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(3); opacity: 0; }
+    }
+
+    /* Модалки */
     #photoViewer {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background: rgba(0,0,0,0.95); z-index: 10000; align-items: center;
       justify-content: center; padding: 2rem;
     }
-    #photoViewer img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 1rem; box-shadow: 0 20px 60px rgba(0,0,0,0.8); }
+    #photoViewer img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 1rem; }
     #photoViewer .close-viewer {
       position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1);
       border: none; color: white; font-size: 2rem; width: 50px; height: 50px;
-      border-radius: 50%; cursor: pointer; z-index: 10001; transition: 0.3s;
+      border-radius: 50%; cursor: pointer; z-index: 10001;
     }
-    #photoViewer .close-viewer:hover { background: rgba(255,255,255,0.25); }
     @media (max-width: 650px) {
       .container { padding: 0 1.2rem; }
       .avatar-placeholder { width: 140px; height: 140px; }
@@ -139,6 +179,14 @@
   </style>
 </head>
 <body>
+
+  <!-- ПРИВЕТСТВИЕ -->
+  <div id="greeting">
+    <h2>Привет, я Глеб 👋</h2>
+    <p>Добро пожаловать в мою вселенную</p>
+    <div class="loader"></div>
+  </div>
+
   <div class="container">
     
     <!-- HERO -->
@@ -146,9 +194,10 @@
       <div class="avatar-placeholder" style="background: transparent; box-shadow: 0 25px 45px -10px rgba(0, 180, 255, 0.35), 0 0 0 3px rgba(255,255,255,0.15); overflow: hidden; padding: 0; width: 180px; height: 180px;">
         <img src="avatar.jpg" alt="Глеб" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;">
       </div>
-      <h1>Глеб</h1>
+      <h1 id="heroTitle">Глеб</h1>
       <div class="location"><i class="fas fa-map-pin"></i> Нижний Тагил</div>
       <div class="age-badge"><i class="fas fa-calendar-alt" style="margin-right: 8px;"></i> 17 лет</div>
+      <p class="hero-desc" id="heroDesc">Автомеханик, 3D-визионер, начинающий веб-разработчик и продавец фотографий. Собираю свою вселенную из гаек, полигонов и пикселей.</p>
       <div class="profession-highlight">
         <i class="fas fa-wrench"></i>
         <div>
@@ -156,7 +205,7 @@
           <div style="color: #9bb5dd; font-size: 1rem;">Учусь &bull; создаю &bull; разбираю</div>
         </div>
       </div>
-      <div class="scroll-hint"><span>Листай вниз</span><i class="fas fa-chevron-down"></i></div>
+      <div class="scroll-hint" id="scrollHint"><span>Листай вниз</span><i class="fas fa-chevron-down"></i></div>
     </div>
 
     <!-- ХОББИ И ИНТЕРЕСЫ -->
@@ -174,7 +223,7 @@
         </div>
         <div class="card">
           <div class="card-icon"><i class="fas fa-camera-retro"></i></div>
-          <h3>Фотография</h3>
+          <h3>Фотографии</h3>
           <p>Красивые снимки на фотик: природа, urban, портреты. Ловлю свет и тени.</p>
           <div class="hobby-list">
             <span class="hobby-tag" onclick="openGallery()" style="cursor: pointer;"><i class="fas fa-image"></i> Кадры</span>
@@ -225,30 +274,26 @@
     <!-- КУЛЬТУРА JDM -->
     <section>
       <div class="section-title"><i class="fas fa-car-side"></i> Культура JDM</div>
-      <div class="grid">
-        <div class="card" onclick="openJdmModal(1)" style="cursor: pointer;">
-          <div class="card-icon"><i class="fas fa-info-circle"></i></div>
-          <h3>Немного о культуре JDM</h3>
-          <p>JDM — это не просто автомобили, а целая философия японского автопрома.</p>
-          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-images"></i> 2 фото</span></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+        <div style="flex: 1; min-width: 260px;">
+          <div class="card" style="height: 100%;">
+            <div class="card-icon"><i class="fas fa-flag"></i></div>
+            <h3>Культура JDM</h3>
+            <p style="margin-bottom: 0.5rem;">Японский автопром и его наследие.</p>
+            <div class="hobby-list">
+              <span class="hobby-tag" onclick="openJdmModal(1)" style="cursor: pointer;"><i class="fas fa-info-circle"></i> О культуре</span>
+              <span class="hobby-tag" onclick="openJdmModal(2)" style="cursor: pointer;"><i class="fas fa-history"></i> История</span>
+              <span class="hobby-tag" onclick="openJdmModal(3)" style="cursor: pointer;"><i class="fas fa-cogs"></i> Отличит. черты</span>
+              <span class="hobby-tag" onclick="openJdmModal(4)" style="cursor: pointer;"><i class="fas fa-star"></i> Популярные авто</span>
+            </div>
+          </div>
         </div>
-        <div class="card" onclick="openJdmModal(2)" style="cursor: pointer;">
-          <div class="card-icon"><i class="fas fa-history"></i></div>
-          <h3>История зарождения</h3>
-          <p>Культура JDM зародилась в Японии в 1980-х годах и быстро стала мировой.</p>
-          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-images"></i> 2 фото</span></div>
-        </div>
-        <div class="card" onclick="openJdmModal(3)" style="cursor: pointer;">
-          <div class="card-icon"><i class="fas fa-cogs"></i></div>
-          <h3>Отличительные черты</h3>
-          <p>Правый руль, турбомоторы и агрессивный стайлинг — визитная карточка JDM.</p>
-          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-images"></i> 3 фото</span></div>
-        </div>
-        <div class="card" onclick="openJdmModal(4)" style="cursor: pointer;">
-          <div class="card-icon"><i class="fas fa-star"></i></div>
-          <h3>Популярные автомобили</h3>
-          <p>Nissan Skyline, Honda Integra, Toyota Chaser, Mazda RX-7, Subaru Impreza.</p>
-          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-images"></i> 5 фото</span></div>
+        <div style="flex: 1; min-width: 260px;">
+          <div id="jdmQuoteBlock" style="background: rgba(255,255,255,0.02); border-radius: 2rem; padding: 2rem; backdrop-filter: blur(12px); cursor: pointer; transition: 0.3s;" onclick="smokeEffect(event)" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">
+            <i class="fas fa-quote-right" style="font-size: 2rem; color: #e0556a; opacity: 0.8;"></i>
+            <p class="quote">«JDM — это не просто автомобили, а целая философия японского автопрома.»</p>
+            <p style="color: #607494; font-size: 0.8rem; margin-top: 0.5rem;">Нажми на цитату 🔥</p>
+          </div>
         </div>
       </div>
     </section>
@@ -270,7 +315,38 @@
       </div>
     </section>
 
-    <!-- ФОНДОВЫЙ РЫНОК И АНАЛИТИКА -->
+    <!-- СОЗДАНИЕ САЙТОВ -->
+    <section>
+      <div class="section-title"><i class="fas fa-code"></i> Создание сайтов</div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
+          <h3>Лендинг</h3>
+          <p>Одностраничный сайт для бизнеса. Идеально для старта.</p>
+          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-ruble-sign"></i> от 5 000 ₽</span></div>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-globe"></i></div>
+          <h3>Сайт-визитка</h3>
+          <p>Многостраничный сайт с портфолио и контактами.</p>
+          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-ruble-sign"></i> от 8 000 ₽</span></div>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-calculator"></i></div>
+          <h3>Калькулятор</h3>
+          <p>Рассчитай стоимость своего сайта.</p>
+          <div class="hobby-list"><span class="hobby-tag" onclick="openCalculator()" style="cursor: pointer;"><i class="fas fa-sliders-h"></i> Рассчитать</span></div>
+        </div>
+        <div class="card" style="cursor: pointer;">
+          <div class="card-icon"><i class="fas fa-heart"></i></div>
+          <h3>Поддержать</h3>
+          <p>Если хочешь поддержать моё творчество.</p>
+          <div class="hobby-list"><span class="hobby-tag" onclick="alert('Спасибо! Скоро добавлю ссылку на донат ❤️')"><i class="fas fa-coffee"></i> На кофе</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ФОНДОВЫЙ РЫНОК -->
     <section>
       <div class="section-title"><i class="fas fa-coins"></i> Инвестиции &amp; рынок</div>
       <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
@@ -287,7 +363,7 @@
       </div>
     </section>
 
-    <!-- КОНТАКТНАЯ ИНФОРМАЦИЯ -->
+    <!-- КОНТАКТЫ -->
     <section style="padding-bottom: 2rem;">
       <div class="section-title"><i class="fas fa-address-card"></i> Связь и контакты</div>
       <div style="background: rgba(15,20,32,0.7); backdrop-filter: blur(20px); border-radius: 3rem; padding: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; box-shadow: 0 25px 45px -10px black;">
@@ -306,11 +382,10 @@
           <a href="mailto:sgleb0451@gmail.com" class="hobby-tag" style="text-decoration: none; cursor: pointer;"><i class="fas fa-envelope"></i> sgleb0451@gmail.com</a>
         </div>
       </div>
-      <p style="text-align: center; margin-top: 2rem; color: #607494;">Всегда открыт к новым проектам и знакомствам 🚀</p>
     </section>
 
     <div class="footer">
-      <p>© 2026 Глеб — автомеханик, геймер, 3D-энтузиаст.</p>
+      <p>© 2025 Глеб — автомеханик, геймер, 3D-энтузиаст.</p>
       <p style="margin-top: 0.7rem;"><i class="fas fa-map-pin"></i> Нижний Тагил · Создаю будущее своими руками</p>
       <div style="margin-top: 1.2rem;">
         <a href="https://www.hitwebcounter.com/" target="_blank" rel="noopener" title="Stats Check">
@@ -321,215 +396,190 @@
 
   </div>
 
-  <!-- ПРОСМОТР ФОТО (увеличение) -->
-  <div id="photoViewer">
-    <button class="close-viewer" onclick="closePhotoViewer()">&times;</button>
-    <img id="photoViewerImg" src="" alt="Фото">
-  </div>
+  <!-- МОДАЛКИ -->
+  <div id="photoViewer"><button class="close-viewer" onclick="closePhotoViewer()">&times;</button><img id="photoViewerImg" src="" alt="Фото"></div>
 
-  <!-- МОДАЛКА: ШУТЕРЫ -->
   <div id="shootersModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
     <div style="max-width: 800px; width: 100%; text-align: center; position: relative;">
-      <button onclick="closeShooters()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10; transition: 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">&times;</button>
-      <h2 style="color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2rem; font-weight: 600;"><i class="fas fa-crosshairs" style="color: #4d8eff; margin-right: 0.7rem;"></i>Шутеры</h2>
+      <button onclick="closeShooters()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10;">&times;</button>
+      <h2 style="color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2rem;"><i class="fas fa-crosshairs" style="color: #4d8eff;"></i>Шутеры</h2>
       <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
-        <div onclick="window.open('https://tracker.gg/valorant/profile/riot/ANADE%23ANADE/overview?platform=pc&playlist=unrated&season=ce2783e8-44fc-dd48-3da3-33b5ba6c4a22', '_blank')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.5); transition: transform 0.35s ease; border: 1px solid rgba(255,255,255,0.05); width: 300px;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-          <div style="width: 100%; height: 200px; overflow: hidden; background: #0d1117;"><img src="valorant.jpg" alt="Valorant" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.parentElement.innerHTML='<div style=\\'height:200px;display:flex;align-items:center;justify-content:center;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;\\'></i></div>'"></div>
-          <div style="padding: 1rem; color: #f0f6ff; font-weight: 600; font-size: 1.2rem;">Valorant</div>
-        </div>
-        <div onclick="alert('Скоро добавлю ссылку на свой профиль Apex Legends! 🔜')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.5); transition: transform 0.35s ease; border: 1px solid rgba(255,255,255,0.05); width: 300px;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
-          <div style="width: 100%; height: 200px; overflow: hidden; background: #0d1117;"><img src="apex.jpg" alt="Apex Legends" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.parentElement.innerHTML='<div style=\\'height:200px;display:flex;align-items:center;justify-content:center;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;\\'></i></div>'"></div>
-          <div style="padding: 1rem; color: #f0f6ff; font-weight: 600; font-size: 1.2rem;">Apex Legends</div>
-        </div>
+        <div onclick="window.open('https://tracker.gg/valorant/profile/riot/ANADE%23ANADE/overview?platform=pc&playlist=unrated','_blank')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; width: 300px;"><div style="height: 200px; background: #0d1117;"><img src="valorant.jpg" alt="Valorant" style="width: 100%; height: 100%; object-fit: cover;"></div><div style="padding: 1rem; color: #f0f6ff; font-weight: 600;">Valorant</div></div>
+        <div onclick="alert('Скоро добавлю ссылку на Apex Legends! 🔜')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; width: 300px;"><div style="height: 200px; background: #0d1117;"><img src="apex.jpg" alt="Apex" style="width: 100%; height: 100%; object-fit: cover;"></div><div style="padding: 1rem; color: #f0f6ff; font-weight: 600;">Apex Legends</div></div>
       </div>
     </div>
   </div>
 
-  <!-- МОДАЛКА: ИГРОВОЙ СЕТАП -->
   <div id="setupModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
-    <div style="background: rgba(20,25,38,0.95); backdrop-filter: blur(25px); border-radius: 3rem; padding: 3.5rem 2.5rem; max-width: 550px; width: 100%; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.08); position: relative;">
-      <button onclick="closeSetup()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.08); border: none; color: #aaa; font-size: 2rem; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: 0.3s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.color='#aaa'; this.style.background='rgba(255,255,255,0.08)'">&times;</button>
-      <i class="fas fa-microchip" style="font-size: 4.5rem; color: #ffb84d; margin-bottom: 1.5rem; filter: drop-shadow(0 0 25px rgba(255,180,70,0.5));"></i>
-      <h3 style="font-size: 2rem; color: #f0f6ff; margin-bottom: 1rem;">Мой игровой сетап</h3>
-      <p style="color: #b4c4dd; font-size: 1.15rem; line-height: 1.6;">Скоро добавлю фотографии своих гаджетов с характеристиками и ценами! 🖥️🎮</p>
-      <p style="color: #7b8ca8; margin-top: 1.2rem; font-size: 0.95rem;">ПК, монитор, клавиатура, мышь и общая стоимость сетапа.</p>
+    <div style="background: rgba(20,25,38,0.95); border-radius: 3rem; padding: 3rem; max-width: 550px; text-align: center;">
+      <button onclick="closeSetup()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">&times;</button>
+      <i class="fas fa-microchip" style="font-size: 4rem; color: #ffb84d;"></i>
+      <h3 style="font-size: 2rem; color: #f0f6ff; margin: 1rem 0;">Мой игровой сетап</h3>
+      <p style="color: #b4c4dd;">Скоро добавлю фотографии своих гаджетов! 🖥️🎮</p>
     </div>
   </div>
 
-  <!-- МОДАЛКА: ГАЛЕРЕЯ -->
   <div id="galleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
-    <div style="max-width: 1200px; margin: 0 auto; position: relative;">
-      <button onclick="closeGallery()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10; transition: 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">&times;</button>
-      <h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2.5rem; font-weight: 600;"><i class="fas fa-images" style="color: #4d8eff; margin-right: 0.7rem;"></i>Мои фотографии</h2>
-      <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding-bottom: 3rem;"></div>
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <button onclick="closeGallery()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer;">&times;</button>
+      <h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2rem;"><i class="fas fa-images" style="color: #4d8eff;"></i> Мои фотографии</h2>
+      <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;"></div>
     </div>
   </div>
 
-  <!-- МОДАЛКА: ПРОДАЖИ -->
   <div id="salesModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
-    <div style="background: rgba(20,25,38,0.95); backdrop-filter: blur(25px); border-radius: 3rem; padding: 3.5rem 2.5rem; max-width: 550px; width: 100%; text-align: center; box-shadow: 0 30px 60px rgba(0,0,0,0.7); border: 1px solid rgba(255,255,255,0.08); position: relative;">
-      <button onclick="closeSales()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.08); border: none; color: #aaa; font-size: 2rem; width: 45px; height: 45px; border-radius: 50%; cursor: pointer; transition: 0.3s;" onmouseover="this.style.color='white'; this.style.background='rgba(255,255,255,0.15)'" onmouseout="this.style.color='#aaa'; this.style.background='rgba(255,255,255,0.08)'">&times;</button>
-      <i class="fas fa-smile-wink" style="font-size: 4.5rem; color: #ffb84d; margin-bottom: 1.5rem; filter: drop-shadow(0 0 25px rgba(255,180,70,0.5));"></i>
-      <h3 style="font-size: 2rem; color: #f0f6ff; margin-bottom: 1rem;">Пока ничего не продано</h3>
-      <p style="color: #b4c4dd; font-size: 1.15rem; line-height: 1.6;">Я не продал ещё ни одной фотографии, но скоро обязательно продам! 😊</p>
-      <p style="color: #7b8ca8; margin-top: 1.2rem; font-size: 0.95rem;">Следи за обновлениями — здесь появятся платформа и цена.</p>
+    <div style="background: rgba(20,25,38,0.95); border-radius: 3rem; padding: 3rem; max-width: 550px; text-align: center;">
+      <button onclick="closeSales()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">&times;</button>
+      <i class="fas fa-smile-wink" style="font-size: 4rem; color: #ffb84d;"></i>
+      <h3 style="font-size: 2rem; color: #f0f6ff;">Пока ничего не продано</h3>
+      <p style="color: #b4c4dd;">Но скоро обязательно продам! 😊</p>
     </div>
   </div>
 
-  <!-- МОДАЛКА: MOEX ПОРТФЕЛЬ -->
   <div id="moexModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
-    <div style="max-width: 1100px; margin: 0 auto; position: relative;">
-      <button onclick="closeMoex()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10; transition: 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">&times;</button>
-      <h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2.5rem; font-weight: 600;"><i class="fas fa-chart-bar" style="color: #4d8eff; margin-right: 0.7rem;"></i>Мой портфель MOEX</h2>
-      <div id="moexGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; padding-bottom: 2rem;"></div>
-      <div style="text-align: center; margin-top: 2rem; padding-bottom: 2rem;">
-        <a href="https://www.tbank.ru/invest/stocks/?start=0&end=12&orderType=Desc&sortType=ByPopularity&exchange=MOEX" target="_blank" class="hobby-tag" style="text-decoration: none; cursor: pointer; font-size: 1.05rem; padding: 0.8rem 2rem;"><i class="fas fa-external-link-alt"></i> Смотреть все акции MOEX</a>
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <button onclick="closeMoex()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer;">&times;</button>
+      <h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2rem;"><i class="fas fa-chart-bar" style="color: #4d8eff;"></i> Мой портфель MOEX</h2>
+      <div id="moexGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem;"></div>
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="https://www.tbank.ru/invest/stocks/?start=0&end=12&orderType=Desc&sortType=ByPopularity&exchange=MOEX" target="_blank" class="hobby-tag" style="text-decoration: none; font-size: 1.05rem; padding: 0.8rem 2rem;"><i class="fas fa-external-link-alt"></i> Смотреть все акции MOEX</a>
       </div>
     </div>
   </div>
 
-  <!-- МОДАЛКА: JDM -->
   <div id="jdmModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
-    <div style="max-width: 1000px; margin: 0 auto; position: relative;">
-      <button onclick="closeJdm()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10; transition: 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">&times;</button>
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <button onclick="closeJdm()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer;">&times;</button>
       <div id="jdmContent"></div>
     </div>
   </div>
 
+  <div id="calcModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
+    <div style="background: rgba(20,25,38,0.95); border-radius: 3rem; padding: 3rem; max-width: 600px; width: 100%;">
+      <button onclick="closeCalculator()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">&times;</button>
+      <h2 style="color: #dfe9ff; font-size: 2rem; text-align: center; margin-bottom: 2rem;"><i class="fas fa-calculator" style="color: #4d8eff;"></i> Калькулятор стоимости</h2>
+      <div id="calcForm"></div>
+    </div>
+  </div>
+
   <script>
-    // Фото без неудачных
-    const photos = [
-      "1000005750.jpg", "1000004179.jpg", "1000005761.jpg",
-      "1000004174.jpg", "1000004097.jpg", "1000004163.jpg", "1000004161.jpg",
-      "1000005749.jpg", "1000005764.jpg", "1000004165.jpg", "1000004162.jpg",
-      "1000004167.jpg", "1000005760.jpg", "1000004100.jpg", "1000004164.jpg",
-      "1000004169.jpg", "1000004171.jpg", "1000004166.jpg", "1000005763.jpg",
-      "1000004168.jpg"
-    ];
+    // Приветствие
+    setTimeout(() => {
+      document.getElementById('greeting').classList.add('hidden');
+    }, 2000);
 
-    // ---- JDM ДАННЫЕ ----
-    const jdmData = [
-      {
-        title: "Немного о культуре JDM",
-        text: "JDM (Japanese Domestic Market) — это не просто автомобили, а целая философия японского автопрома. Уникальный стиль, качество и дух соревнований сделали JDM мировой легендой.",
-        photos: ["о культуре.jpg", "о культуре (1).jpg"],
-        descriptions: ["Атмосфера JDM-культуры", "Японский автопром в деталях"]
-      },
-      {
-        title: "История зарождения",
-        text: "Культура JDM зародилась в Японии в 1980-х годах, когда автопроизводители начали создавать спортивные модели для внутреннего рынка, превосходящие мировые аналоги.",
-        photos: ["зарождение.jpg", "зарождение (1).jpg"],
-        descriptions: ["Первые шаги JDM", "Эволюция японского стиля"]
-      },
-      {
-        title: "Отличительные черты",
-        text: "",
-        items: [
-          { photo: "оч правый руль.jpg", title: "Правый руль", desc: "Отличительная особенность JDM-автомобилей, созданных для японских дорог с левосторонним движением." },
-          { photo: "оч стайлинг.jpg", title: "Агрессивный стайлинг", desc: "Низкий профиль, широкие арки, спойлеры и обвесы, подчёркивающие спортивный характер." },
-          { photo: "оч турбомоторы.jpg", title: "Турбомоторы", desc: "Высокооборотистые двигатели с наддувом, выдающие впечатляющую мощность при небольшом объёме." }
-        ]
-      },
-      {
-        title: "Популярные автомобили JDM",
-        text: "",
-        items: [
-          { photo: "Skyline R33 R34.jpg", title: "Nissan Skyline GT-R R33/R34", desc: "Легендарный «Годзилла» с полным приводом и турбомотором RB26DETT. Икона JDM." },
-          { photo: "Integra Type R.jpg", title: "Honda Integra Type R", desc: "Переднеприводный спорткар с атмосферным мотором B18C, славящийся управляемостью." },
-          { photo: "Chaser JZX100.jpg", title: "Toyota Chaser JZX100", desc: "Культовый дрифтовый седан с турбомотором 1JZ-GTE и задним приводом." },
-          { photo: "RX-7.jpg", title: "Mazda RX-7", desc: "Роторный спорткар с двигателем Ванкеля — лёгкий, мощный и неповторимый." },
-          { photo: "Impreza 22B.jpg", title: "Subaru Impreza WRX 22B STi", desc: "Ралли-монстр с турбооппозитником и легендарным полным приводом." }
-        ]
+    // UTM-метки
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('utm') === '3d') {
+      document.getElementById('heroTitle').textContent = 'Создам 3D-модель на заказ';
+      document.getElementById('heroDesc').textContent = 'Разработка уникальных 3D-моделей для игр, печати и визуализаций.';
+    } else if (params.get('utm') === 'photo') {
+      document.getElementById('heroTitle').textContent = 'Продажа фотографий';
+      document.getElementById('heroDesc').textContent = 'Красивые снимки природы, города и портреты на продажу.';
+    }
+
+    // Дым
+    function smokeEffect(e) {
+      const rect = document.getElementById('jdmQuoteBlock').getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      for (let i = 0; i < 15; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'smoke-particle';
+        particle.style.left = cx + 'px';
+        particle.style.top = cy + 'px';
+        particle.style.setProperty('--dx', (Math.random() - 0.5) * 200 + 'px');
+        particle.style.setProperty('--dy', -(Math.random() * 150 + 50) + 'px');
+        document.body.appendChild(particle);
+        setTimeout(() => particle.remove(), 1500);
       }
-    ];
+    }
 
-    // ---- ПРОСМОТР ФОТО ----
-    function openPhotoViewer(src) {
-      document.getElementById('photoViewerImg').src = src;
-      document.getElementById('photoViewer').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-    function closePhotoViewer() {
-      document.getElementById('photoViewer').style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-    document.getElementById('photoViewer').addEventListener('click', function(e) {
-      if (e.target === this) closePhotoViewer();
+    // Стрелка
+    window.addEventListener('scroll', () => {
+      document.getElementById('scrollHint').style.opacity = window.scrollY > 100 ? '0' : '1';
     });
 
-    // ---- ШУТЕРЫ ----
+    // Exit intent
+    let exitShown = false;
+    document.addEventListener('mouseout', function(e) {
+      if (e.clientY < 10 && !exitShown) {
+        exitShown = true;
+        setTimeout(() => {
+          if (confirm('⚡ Не уходи! Скидка 10% на первый заказ сайта. Остаться?')) {
+            document.getElementById('heroTitle').scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 500);
+      }
+    });
+
+    // Калькулятор
+    function openCalculator() {
+      document.getElementById('calcModal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      const form = document.getElementById('calcForm');
+      form.innerHTML = `
+        <div style="margin-bottom: 1.5rem;">
+          <label style="color: #b4c4dd;">Тип сайта</label>
+          <select id="calcType" style="width: 100%; padding: 0.8rem; background: #1a1e2b; color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; margin-top: 0.5rem;">
+            <option value="5000">Лендинг (5 000 ₽)</option>
+            <option value="8000">Сайт-визитка (8 000 ₽)</option>
+            <option value="15000">Интернет-магазин (15 000 ₽)</option>
+          </select>
+        </div>
+        <div style="margin-bottom: 1.5rem;">
+          <label style="color: #b4c4dd;">Срочность</label>
+          <select id="calcUrgency" style="width: 100%; padding: 0.8rem; background: #1a1e2b; color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; margin-top: 0.5rem;">
+            <option value="1">Стандарт (x1)</option>
+            <option value="1.5">Срочно (x1.5)</option>
+            <option value="2">Супер-срочно (x2)</option>
+          </select>
+        </div>
+        <div style="text-align: center; font-size: 1.5rem; color: #f0f6ff; padding: 1.5rem; background: rgba(77,142,255,0.1); border-radius: 1rem;">
+          Итого: <span id="calcResult" style="color: #4d8eff; font-weight: 700;">5 000</span> ₽
+        </div>
+      `;
+      function updateCalc() {
+        const base = parseInt(document.getElementById('calcType').value);
+        const urgency = parseFloat(document.getElementById('calcUrgency').value);
+        document.getElementById('calcResult').textContent = (base * urgency).toLocaleString();
+      }
+      document.getElementById('calcType').addEventListener('change', updateCalc);
+      document.getElementById('calcUrgency').addEventListener('change', updateCalc);
+    }
+    function closeCalculator() {
+      document.getElementById('calcModal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    document.getElementById('calcModal').addEventListener('click', function(e) { if (e.target === this) closeCalculator(); });
+
+    // Заглушки модалок
     function openShooters() { document.getElementById('shootersModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
     function closeShooters() { document.getElementById('shootersModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-    document.getElementById('shootersModal').addEventListener('click', function(e) { if (e.target === this) closeShooters(); });
-
-    // ---- ИГРОВОЙ СЕТАП ----
     function openSetup() { document.getElementById('setupModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
     function closeSetup() { document.getElementById('setupModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-    document.getElementById('setupModal').addEventListener('click', function(e) { if (e.target === this) closeSetup(); });
-
-    // ---- ГАЛЕРЕЯ ----
-    function openGallery() {
-      const modal = document.getElementById('galleryModal');
-      const grid = document.getElementById('galleryGrid');
-      grid.innerHTML = '';
-      photos.forEach(photo => {
-        const card = document.createElement('div');
-        card.style.cssText = `background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.5); transition: transform 0.35s ease, box-shadow 0.35s ease; cursor: pointer; border: 1px solid rgba(255,255,255,0.05);`;
-        card.onmouseover = function() { this.style.transform = 'scale(1.03)'; this.style.boxShadow = '0 20px 45px rgba(0,160,255,0.35)'; };
-        card.onmouseout = function() { this.style.transform = 'scale(1)'; this.style.boxShadow = '0 15px 30px rgba(0,0,0,0.5)'; };
-        card.innerHTML = `<div style="width: 100%; height: 260px; overflow: hidden; background: #0d1117;"><img src="${photo}" alt="Фото" style="width: 100%; height: 100%; object-fit: cover; display: block;" onerror="this.parentElement.innerHTML='<div style=\\'height:260px;display:flex;align-items:center;justify-content:center;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;\\'></i></div>'"></div><div style="padding: 0.9rem 1.2rem; color: #8b9cbb; font-size: 0.85rem; text-align: center;">${photo}</div>`;
-        card.onclick = function(e) { const img = this.querySelector('img'); if (img && img.src && !img.src.includes('error')) { openPhotoViewer(img.src); } };
-        grid.appendChild(card);
-      });
-      modal.style.display = 'block'; document.body.style.overflow = 'hidden';
-    }
-    function closeGallery() { document.getElementById('galleryModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-    document.getElementById('galleryModal').addEventListener('click', function(e) { if (e.target === this) closeGallery(); });
-
-    // ---- ПРОДАЖИ ----
     function openSales() { document.getElementById('salesModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
     function closeSales() { document.getElementById('salesModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-    document.getElementById('salesModal').addEventListener('click', function(e) { if (e.target === this) closeSales(); });
+    function openPhotoViewer(src) { document.getElementById('photoViewerImg').src = src; document.getElementById('photoViewer').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    function closePhotoViewer() { document.getElementById('photoViewer').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-    // ---- JDM МОДАЛКА ----
-    function openJdmModal(index) {
-      const data = jdmData[index - 1];
-      const content = document.getElementById('jdmContent');
-      let html = `<h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2rem; font-weight: 600;"><i class="fas fa-car-side" style="color: #e0556a; margin-right: 0.7rem;"></i>${data.title}</h2>`;
-      
-      if (data.text) {
-        html += `<p style="text-align: center; color: #b4c4dd; font-size: 1.15rem; max-width: 700px; margin: 0 auto 2.5rem; line-height: 1.7;">${data.text}</p>`;
-      }
-
-      if (data.photos) {
-        html += `<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; padding-bottom: 2rem;">`;
-        data.photos.forEach((photo, i) => {
-          html += `<div style="background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.5);"><div style="width: 100%; height: 250px; overflow: hidden; background: #0d1117;"><img src="${photo}" alt="${data.descriptions ? data.descriptions[i] : ''}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onclick="openPhotoViewer(this.src)" onerror="this.parentElement.innerHTML='<div style=\\'height:250px;display:flex;align-items:center;justify-content:center;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;\\'></i></div>'"></div>`;
-          if (data.descriptions && data.descriptions[i]) {
-            html += `<div style="padding: 1rem; color: #b4c4dd; text-align: center; font-size: 0.95rem;">${data.descriptions[i]}</div>`;
-          }
-          html += `</div>`;
-        });
-        html += `</div>`;
-      }
-
-      if (data.items) {
-        data.items.forEach(item => {
-          html += `<div style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin-bottom: 2rem; background: rgba(255,255,255,0.03); border-radius: 1.5rem; padding: 1.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.4); align-items: center;">`;
-          html += `<div style="flex: 0 0 280px; height: 200px; overflow: hidden; border-radius: 1rem; background: #0d1117;"><img src="${item.photo}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: cover; display: block;" onclick="openPhotoViewer(this.src)" onerror="this.parentElement.innerHTML='<div style=\\'height:200px;display:flex;align-items:center;justify-content:center;color:#555;\\'><i class=\\'fas fa-image\\' style=\\'font-size:3rem;\\'></i></div>'"></div>`;
-          html += `<div style="flex: 1; min-width: 250px;"><h3 style="font-size: 1.4rem; color: #f0f6ff; margin-bottom: 0.5rem;">${item.title}</h3><p style="color: #b4c4dd; font-size: 1rem; line-height: 1.6;">${item.desc}</p></div>`;
-          html += `</div>`;
-        });
-      }
-
-      content.innerHTML = html;
-      document.getElementById('jdmModal').style.display = 'block';
-      document.body.style.overflow = 'hidden';
+    // Галерея
+    const photos = ["1000005750.jpg","1000004179.jpg","1000005761.jpg","1000004174.jpg","1000004097.jpg","1000004163.jpg","1000004161.jpg","1000005749.jpg","1000005764.jpg","1000004165.jpg","1000004162.jpg","1000004167.jpg","1000005760.jpg","1000004100.jpg","1000004164.jpg","1000004169.jpg","1000004171.jpg","1000004166.jpg","1000005763.jpg","1000004168.jpg"];
+    function openGallery() {
+      const grid = document.getElementById('galleryGrid');
+      grid.innerHTML = '';
+      photos.forEach(p => {
+        const card = document.createElement('div');
+        card.style.cssText = 'background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; cursor: pointer;';
+        card.innerHTML = `<div style="height: 260px; background: #0d1117;"><img src="${p}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'"></div><div style="padding: 0.9rem; color: #8b9cbb; font-size: 0.85rem; text-align: center;">${p}</div>`;
+        card.onclick = () => openPhotoViewer(p);
+        grid.appendChild(card);
+      });
+      document.getElementById('galleryModal').style.display = 'block'; document.body.style.overflow = 'hidden';
     }
-    function closeJdm() { document.getElementById('jdmModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-    document.getElementById('jdmModal').addEventListener('click', function(e) { if (e.target === this) closeJdm(); });
+    function closeGallery() { document.getElementById('galleryModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
-    // ---- MOEX ПОРТФЕЛЬ ----
+    // MOEX
     const stocks = [
       { name: "Сбербанк", ticker: "SBER", price: "323,8 ₽", profit: "+6,92%", positive: true },
       { name: "Газпром", ticker: "GAZP", price: "120,47 ₽", profit: "−0,71%", positive: false },
@@ -544,21 +594,64 @@
       { name: "Астра", ticker: "ASTR", price: "277,25 ₽", profit: "−8,32%", positive: false }
     ];
     function openMoex() {
-      const modal = document.getElementById('moexModal');
       const grid = document.getElementById('moexGrid');
       grid.innerHTML = '';
-      stocks.forEach(stock => {
+      stocks.forEach(s => {
         const card = document.createElement('div');
-        card.style.cssText = `background: rgba(18, 23, 35, 0.9); backdrop-filter: blur(12px); border-radius: 1.5rem; padding: 1.3rem 1rem; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.06); transition: transform 0.3s ease;`;
-        card.onmouseover = () => card.style.transform = 'scale(1.04)';
-        card.onmouseout = () => card.style.transform = 'scale(1)';
-        card.innerHTML = `<div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, ${stock.positive ? '#4caf8433' : '#e0556a33'}, #1a1e2b); margin: 0 auto 0.7rem; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; color: #f0f6ff;">${stock.ticker.charAt(0)}</div><div style="font-weight: 600; color: #f0f6ff; font-size: 1rem; margin-bottom: 0.2rem;">${stock.name}</div><div style="color: #7b8ca8; font-size: 0.8rem; margin-bottom: 0.5rem;">${stock.ticker}</div><div style="color: #cfdefa; font-weight: 500; font-size: 0.95rem;">${stock.price}</div><div style="color: ${stock.positive ? '#4caf84' : '#e0556a'}; font-weight: 600; font-size: 1rem; margin-top: 0.3rem;">${stock.profit}</div>`;
+        card.style.cssText = 'background: rgba(18,23,35,0.9); border-radius: 1.5rem; padding: 1.3rem; text-align: center;';
+        card.innerHTML = `<div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,${s.positive?'#4caf8433':'#e0556a33'},#1a1e2b);margin:0 auto;display:flex;align-items:center;justify-content:center;font-weight:700;">${s.ticker[0]}</div><div style="color:#f0f6ff;font-weight:600;margin-top:0.5rem;">${s.name}</div><div style="color:#7b8ca8;font-size:0.8rem;">${s.ticker}</div><div style="color:#cfdefa;">${s.price}</div><div style="color:${s.positive?'#4caf84':'#e0556a'};font-weight:600;">${s.profit}</div>`;
         grid.appendChild(card);
       });
-      modal.style.display = 'block'; document.body.style.overflow = 'hidden';
+      document.getElementById('moexModal').style.display = 'block'; document.body.style.overflow = 'hidden';
     }
     function closeMoex() { document.getElementById('moexModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
-    document.getElementById('moexModal').addEventListener('click', function(e) { if (e.target === this) closeMoex(); });
+
+    // JDM
+    const jdmData = [
+      { title: "Немного о культуре JDM", text: "JDM — это не просто автомобили, а целая философия японского автопрома.", photos: ["о культуре.jpg", "о культуре (1).jpg"], descriptions: ["Атмосфера JDM", "Японский стиль"] },
+      { title: "История зарождения", text: "Культура JDM зародилась в Японии в 1980-х годах.", photos: ["зарождение.jpg", "зарождение (1).jpg"], descriptions: ["Первые шаги", "Эволюция стиля"] },
+      { title: "Отличительные черты", items: [
+        { photo: "оч правый руль.jpg", title: "Правый руль", desc: "Особенность JDM-автомобилей для японских дорог." },
+        { photo: "оч стайлинг.jpg", title: "Агрессивный стайлинг", desc: "Низкий профиль, широкие арки, спойлеры." },
+        { photo: "оч турбосторы.jpg", title: "Турбомоторы", desc: "Высокооборотистые двигатели с наддувом." }
+      ]},
+      { title: "Популярные автомобили JDM", items: [
+        { photo: "Skyline R33 R34.jpg", title: "Nissan Skyline GT-R", desc: "Легендарный «Годзилла» с турбомотором RB26DETT." },
+        { photo: "Integra Type R.jpg", title: "Honda Integra Type R", desc: "Переднеприводный спорткар с мотором B18C." },
+        { photo: "Chaser JZX100.jpg", title: "Toyota Chaser JZX100", desc: "Культовый дрифтовый седан с 1JZ-GTE." },
+        { photo: "RX-7.jpg", title: "Mazda RX-7", desc: "Роторный спорткар с двигателем Ванкеля." },
+        { photo: "Impreza 22B.jpg", title: "Subaru Impreza 22B STi", desc: "Ралли-монстр с турбооппозитником." }
+      ]}
+    ];
+    function openJdmModal(i) {
+      const d = jdmData[i-1];
+      let h = `<h2 style="color:#dfe9ff;font-size:2.2rem;text-align:center;margin-bottom:2rem;">${d.title}</h2>`;
+      if (d.text) h += `<p style="color:#b4c4dd;text-align:center;max-width:700px;margin:0 auto 2rem;">${d.text}</p>`;
+      if (d.photos) {
+        h += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">';
+        d.photos.forEach((p,j) => {
+          h += `<div style="background:rgba(255,255,255,0.03);border-radius:1.5rem;overflow:hidden;"><div style="height:250px;background:#0d1117;"><img src="${p}" style="width:100%;height:100%;object-fit:cover;" onclick="openPhotoViewer(this.src)"></div>`;
+          if (d.descriptions[j]) h += `<div style="padding:1rem;color:#b4c4dd;text-align:center;">${d.descriptions[j]}</div>`;
+          h += '</div>';
+        });
+        h += '</div>';
+      }
+      if (d.items) {
+        d.items.forEach(item => {
+          h += `<div style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-bottom:2rem;background:rgba(255,255,255,0.03);border-radius:1.5rem;padding:1.5rem;align-items:center;">`;
+          h += `<div style="flex:0 0 280px;height:200px;border-radius:1rem;overflow:hidden;"><img src="${item.photo}" style="width:100%;height:100%;object-fit:cover;" onclick="openPhotoViewer(this.src)"></div>`;
+          h += `<div style="flex:1;"><h3 style="color:#f0f6ff;">${item.title}</h3><p style="color:#b4c4dd;">${item.desc}</p></div></div>`;
+        });
+      }
+      document.getElementById('jdmContent').innerHTML = h;
+      document.getElementById('jdmModal').style.display = 'block'; document.body.style.overflow = 'hidden';
+    }
+    function closeJdm() { document.getElementById('jdmModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+    // Закрытие по фону
+    ['shootersModal','setupModal','galleryModal','salesModal','moexModal','jdmModal'].forEach(id => {
+      document.getElementById(id).addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; document.body.style.overflow = 'auto'; });
+    });
   </script>
 </body>
 </html>
