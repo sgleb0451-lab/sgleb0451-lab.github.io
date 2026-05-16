@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
   <title>Глеб | Автомеханик · 3D · Фондовый рынок</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +14,10 @@
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: radial-gradient(circle at 20% 10%, #1a1e2b, #0b0d14);
       color: #e8edf2; line-height: 1.5; scroll-behavior: smooth; overflow-x: hidden;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
     }
-    .container { max-width: 1300px; margin: 0 auto; padding: 0 2rem; }
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 1rem; }
 
     /* Приветствие */
     #greeting {
@@ -26,26 +28,39 @@
     }
     #greeting.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
     #greeting h2 {
-      font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; text-align: center;
+      font-size: clamp(1.8rem, 5vw, 3rem); font-weight: 700; text-align: center;
       background: linear-gradient(to right, #ffffff, #b4d0ff, #8bb9ff);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; margin-bottom: 1rem;
-      animation: fadeInUp 0.8s ease;
+      animation: fadeInUp 0.8s ease; padding: 0 1rem;
     }
     #greeting p {
-      color: #a0b9da; font-size: 1.2rem; text-align: center;
-      animation: fadeInUp 0.8s ease 0.2s both;
+      color: #a0b9da; font-size: 1rem; text-align: center;
+      animation: fadeInUp 0.8s ease 0.2s both; padding: 0 1rem;
     }
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
     #greeting .loader {
-      width: 50px; height: 50px; border: 3px solid rgba(255,255,255,0.1);
+      width: 40px; height: 40px; border: 3px solid rgba(255,255,255,0.1);
       border-top: 3px solid #4d8eff; border-radius: 50%;
-      animation: spin 0.8s linear infinite; margin-top: 2rem;
+      animation: spin 0.8s linear infinite; margin-top: 1.5rem;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Кнопка поддержки */
+    #supportBtn {
+      position: fixed; bottom: 25px; right: 25px; z-index: 9997;
+      width: 60px; height: 60px; border-radius: 50%;
+      background: linear-gradient(135deg, #e0556a, #ff6b81);
+      border: none; color: white; font-size: 1.5rem; cursor: pointer;
+      box-shadow: 0 8px 25px rgba(224,85,106,0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex; align-items: center; justify-content: center;
+    }
+    #supportBtn:hover { transform: scale(1.1); box-shadow: 0 12px 35px rgba(224,85,106,0.6); }
+    #supportBtn:active { transform: scale(0.95); }
 
     /* Hero */
     .hero {
@@ -55,126 +70,136 @@
       background: radial-gradient(ellipse at 50% 30%, rgba(45, 55, 80, 0.7) 0%, transparent 70%);
     }
     .avatar-placeholder {
-      width: 180px; height: 180px; border-radius: 50%;
+      width: 150px; height: 150px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      margin-bottom: 2rem; transition: transform 0.4s ease, box-shadow 0.4s ease;
+      margin-bottom: 1.5rem; transition: transform 0.4s ease, box-shadow 0.4s ease;
     }
     .avatar-placeholder:hover { transform: scale(1.03); }
     .hero h1 {
-      font-size: clamp(3.5rem, 10vw, 5.5rem); font-weight: 700; letter-spacing: -1px;
+      font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 700; letter-spacing: -1px;
       background: linear-gradient(to right, #ffffff, #b4d0ff, #8bb9ff);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; margin-bottom: 0.5rem;
-      filter: drop-shadow(0 6px 15px rgba(0,160,255,0.3));
+      filter: drop-shadow(0 6px 15px rgba(0,160,255,0.3)); padding: 0 0.5rem;
     }
     .hero .location {
-      font-size: 1.4rem; font-weight: 500; color: #a0b9da;
+      font-size: 1.1rem; font-weight: 500; color: #a0b9da;
       display: flex; align-items: center; gap: 0.5rem; justify-content: center;
-      margin-bottom: 1.5rem; background: rgba(20, 28, 40, 0.6);
-      padding: 0.5rem 1.8rem; border-radius: 50px; backdrop-filter: blur(12px);
+      margin-bottom: 1.2rem; background: rgba(20, 28, 40, 0.6);
+      padding: 0.4rem 1.5rem; border-radius: 50px; backdrop-filter: blur(12px);
       box-shadow: 0 8px 18px rgba(0,0,0,0.4);
     }
-    .location i { color: #6cb4ff; font-size: 1.2rem; }
+    .location i { color: #6cb4ff; font-size: 1rem; }
     .age-badge {
       background: rgba(0, 180, 255, 0.12); border: 1px solid rgba(100, 180, 255, 0.3);
-      padding: 0.5rem 1.7rem; border-radius: 40px; font-weight: 500;
-      font-size: 1.2rem; backdrop-filter: blur(12px); margin-bottom: 1rem;
+      padding: 0.4rem 1.5rem; border-radius: 40px; font-weight: 500;
+      font-size: 1rem; backdrop-filter: blur(12px); margin-bottom: 1rem;
       color: #c6e0ff; box-shadow: 0 8px 20px rgba(0,120,255,0.2);
     }
     .hero-desc {
-      max-width: 600px; color: #b4c4dd; font-size: 1.05rem;
-      line-height: 1.6; margin-bottom: 2rem;
+      max-width: 600px; color: #b4c4dd; font-size: 0.95rem;
+      line-height: 1.6; margin-bottom: 1.5rem; padding: 0 0.5rem;
     }
     .scroll-hint {
-      position: absolute; bottom: 2.5rem; display: flex;
-      flex-direction: column; align-items: center; gap: 0.5rem;
-      color: #778da0; font-size: 0.9rem; animation: float 2.4s infinite ease-in-out;
+      position: absolute; bottom: 2rem; display: flex;
+      flex-direction: column; align-items: center; gap: 0.3rem;
+      color: #778da0; font-size: 0.8rem; animation: float 2.4s infinite ease-in-out;
     }
-    .scroll-hint i { font-size: 1.4rem; color: #5b7ca0; }
+    .scroll-hint i { font-size: 1.2rem; color: #5b7ca0; }
     @keyframes float {
-      0% { transform: translateY(0); } 50% { transform: translateY(10px); } 100% { transform: translateY(0); }
+      0% { transform: translateY(0); } 50% { transform: translateY(8px); } 100% { transform: translateY(0); }
     }
-    section { padding: 5rem 0; position: relative; }
+    section { padding: 3rem 0; position: relative; }
     .section-title {
-      font-size: 2.3rem; font-weight: 600; margin-bottom: 2.8rem;
-      display: flex; align-items: center; gap: 1rem; letter-spacing: -0.5px;
+      font-size: clamp(1.6rem, 4vw, 2rem); font-weight: 600; margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 0.7rem; letter-spacing: -0.5px;
       color: #dfe9ff; position: relative; padding-left: 1rem;
     }
-    .section-title i { font-size: 2.2rem; color: #4d8eff; filter: drop-shadow(0 0 10px rgba(77,142,255,0.6)); }
+    .section-title i { font-size: 1.6rem; color: #4d8eff; filter: drop-shadow(0 0 10px rgba(77,142,255,0.6)); }
     .section-title::before {
       content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-      width: 5px; height: 42px; background: linear-gradient(to bottom, #3b82f6, #60a5fa);
-      border-radius: 10px; box-shadow: 0 0 18px #2563eb;
+      width: 4px; height: 30px; background: linear-gradient(to bottom, #3b82f6, #60a5fa);
+      border-radius: 8px; box-shadow: 0 0 15px #2563eb;
     }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; margin-top: 1rem; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.2rem; margin-top: 0.5rem; }
     .card {
-      background: rgba(18, 23, 35, 0.7); backdrop-filter: blur(18px); border-radius: 2.5rem;
-      padding: 2rem 1.7rem; box-shadow: 0 25px 45px -15px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
-      transition: all 0.35s ease; display: flex; flex-direction: column; align-items: flex-start; gap: 1.2rem;
+      background: rgba(18, 23, 35, 0.7); backdrop-filter: blur(18px); border-radius: 2rem;
+      padding: 1.5rem 1.3rem; box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.06);
+      transition: all 0.35s ease; display: flex; flex-direction: column; align-items: flex-start; gap: 0.8rem;
     }
-    .card:hover {
-      transform: translateY(-7px); background: rgba(25, 32, 48, 0.8);
-      box-shadow: 0 32px 55px -12px rgba(0, 160, 255, 0.3), 0 0 0 1px rgba(100, 180, 255, 0.25);
-    }
+    .card:hover { transform: translateY(-5px); background: rgba(25, 32, 48, 0.8); box-shadow: 0 28px 50px -10px rgba(0, 160, 255, 0.3); }
     .card-icon {
-      font-size: 2.3rem; background: rgba(56, 88, 140, 0.25); width: 65px; height: 65px;
+      font-size: 1.8rem; background: rgba(56, 88, 140, 0.25); width: 50px; height: 50px;
       display: flex; align-items: center; justify-content: center; border-radius: 50%;
-      color: #b0d0ff; box-shadow: 0 14px 22px rgba(0,80,200,0.3); transition: 0.3s;
+      color: #b0d0ff; box-shadow: 0 10px 18px rgba(0,80,200,0.3); transition: 0.3s;
     }
-    .card h3 { font-size: 1.7rem; font-weight: 600; color: #f0f6ff; }
-    .card p { color: #b4c4dd; font-size: 1.05rem; margin-top: -0.3rem; }
+    .card h3 { font-size: 1.3rem; font-weight: 600; color: #f0f6ff; }
+    .card p { color: #b4c4dd; font-size: 0.9rem; margin-top: -0.2rem; }
     .profession-highlight {
       background: linear-gradient(120deg, rgba(30,50,80,0.8), rgba(20,28,45,0.9));
-      border-left: 5px solid #3b82f6; border-radius: 2rem; padding: 1.8rem 2.2rem;
-      margin: 1.5rem 0 2rem; backdrop-filter: blur(20px); display: flex;
-      align-items: center; gap: 1.5rem; box-shadow: 0 22px 40px -10px black;
+      border-left: 4px solid #3b82f6; border-radius: 1.5rem; padding: 1.2rem 1.5rem;
+      margin: 1rem 0 1.5rem; backdrop-filter: blur(20px); display: flex;
+      align-items: center; gap: 1rem; box-shadow: 0 18px 35px -8px black;
     }
-    .profession-highlight i { font-size: 2.8rem; color: #608bff; }
-    .hobby-list { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 0.8rem; }
+    .profession-highlight i { font-size: 2rem; color: #608bff; }
+    .profession-highlight div div:first-child { font-size: 1.3rem !important; }
+    .profession-highlight div div:last-child { font-size: 0.85rem !important; }
+    .hobby-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.5rem; }
     .hobby-tag {
       background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
-      padding: 0.55rem 1.5rem; border-radius: 3rem; font-weight: 500;
-      backdrop-filter: blur(8px); display: flex; align-items: center; gap: 0.5rem;
-      color: #cfdefa; transition: 0.25s; box-shadow: 0 5px 12px rgba(0,0,0,0.3);
+      padding: 0.4rem 1.2rem; border-radius: 2rem; font-weight: 500; font-size: 0.85rem;
+      backdrop-filter: blur(8px); display: flex; align-items: center; gap: 0.4rem;
+      color: #cfdefa; transition: 0.25s; box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
     .hobby-tag i { color: #5f9eff; }
-    .hobby-tag:hover {
-      background: rgba(70, 130, 220, 0.15); border-color: #3b6cb7;
-      box-shadow: 0 10px 18px rgba(0,140,255,0.25);
-    }
+    .hobby-tag:hover { background: rgba(70, 130, 220, 0.15); border-color: #3b6cb7; box-shadow: 0 8px 16px rgba(0,140,255,0.25); }
     .footer {
-      text-align: center; padding: 3rem 1rem 2.5rem; color: #5b6f8c;
-      border-top: 1px solid rgba(255,255,255,0.05); margin-top: 2rem;
+      text-align: center; padding: 2rem 1rem; color: #5b6f8c;
+      border-top: 1px solid rgba(255,255,255,0.05); margin-top: 1rem;
+      font-size: 0.85rem;
     }
-    .quote { font-style: italic; font-size: 1.15rem; color: #a0b9dd; margin: 1.5rem 0; }
+    .quote { font-style: italic; font-size: 1rem; color: #a0b9dd; margin: 1rem 0; }
 
     /* Дым */
     .smoke-particle {
       position: fixed; pointer-events: none; z-index: 9998;
-      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+      background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
       border-radius: 50%; animation: smokeRise 1.5s ease-out forwards;
     }
     @keyframes smokeRise {
-      0% { transform: translate(0, 0) scale(0.5); opacity: 1; }
-      100% { transform: translate(var(--dx), var(--dy)) scale(3); opacity: 0; }
+      0% { transform: translate(0, 0) scale(0.3); opacity: 1; }
+      100% { transform: translate(var(--dx), var(--dy)) scale(4); opacity: 0; }
     }
 
     /* Модалки */
-    #photoViewer {
+    .modal-overlay {
       display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0,0,0,0.95); z-index: 10000; align-items: center;
-      justify-content: center; padding: 2rem;
+      background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 2rem 1rem;
     }
-    #photoViewer img { max-width: 90%; max-height: 90%; object-fit: contain; border-radius: 1rem; }
-    #photoViewer .close-viewer {
-      position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1);
-      border: none; color: white; font-size: 2rem; width: 50px; height: 50px;
-      border-radius: 50%; cursor: pointer; z-index: 10001;
+    .modal-overlay.active { display: block; }
+    .modal-overlay.flex { display: flex; align-items: center; justify-content: center; }
+    .modal-close {
+      position: fixed; top: 15px; right: 15px; background: rgba(255,255,255,0.1);
+      border: none; color: white; font-size: 1.5rem; width: 40px; height: 40px;
+      border-radius: 50%; cursor: pointer; z-index: 10; transition: 0.3s;
     }
-    @media (max-width: 650px) {
-      .container { padding: 0 1.2rem; }
-      .avatar-placeholder { width: 140px; height: 140px; }
-      .section-title { font-size: 1.9rem; }
+    .modal-close:hover { background: rgba(255,255,255,0.25); }
+    #photoViewer { z-index: 10000; }
+    #photoViewer img { max-width: 95%; max-height: 85%; object-fit: contain; border-radius: 0.8rem; }
+
+    /* Адаптив */
+    @media (max-width: 768px) {
+      .grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
+      .card { padding: 1.2rem 1rem; border-radius: 1.5rem; }
+      .avatar-placeholder { width: 120px; height: 120px; }
+      .profession-highlight { padding: 1rem 1.2rem; flex-direction: column; text-align: center; border-left: none; border-bottom: 4px solid #3b82f6; }
+      #supportBtn { width: 50px; height: 50px; bottom: 20px; right: 15px; font-size: 1.2rem; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2rem; }
+      .hero-desc { font-size: 0.85rem; }
+      section { padding: 2rem 0; }
+      .section-title { font-size: 1.3rem; }
     }
   </style>
 </head>
@@ -187,22 +212,25 @@
     <div class="loader"></div>
   </div>
 
+  <!-- КНОПКА ПОДДЕРЖКИ -->
+  <button id="supportBtn" onclick="openSupport()" title="Поддержать"><i class="fas fa-heart"></i></button>
+
   <div class="container">
     
     <!-- HERO -->
     <div class="hero">
-      <div class="avatar-placeholder" style="background: transparent; box-shadow: 0 25px 45px -10px rgba(0, 180, 255, 0.35), 0 0 0 3px rgba(255,255,255,0.15); overflow: hidden; padding: 0; width: 180px; height: 180px;">
+      <div class="avatar-placeholder" style="background: transparent; box-shadow: 0 20px 40px -8px rgba(0, 180, 255, 0.35), 0 0 0 3px rgba(255,255,255,0.15); overflow: hidden; padding: 0;">
         <img src="avatar.jpg" alt="Глеб" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;">
       </div>
       <h1 id="heroTitle">Глеб</h1>
       <div class="location"><i class="fas fa-map-pin"></i> Нижний Тагил</div>
-      <div class="age-badge"><i class="fas fa-calendar-alt" style="margin-right: 8px;"></i> 17 лет</div>
+      <div class="age-badge"><i class="fas fa-calendar-alt" style="margin-right: 6px;"></i> 17 лет</div>
       <p class="hero-desc" id="heroDesc">Автомеханик, 3D-визионер, начинающий веб-разработчик и продавец фотографий. Собираю свою вселенную из гаек, полигонов и пикселей.</p>
       <div class="profession-highlight">
         <i class="fas fa-wrench"></i>
         <div>
-          <div style="font-weight: 600; font-size: 1.6rem; color: #e0edff;">Автомеханик</div>
-          <div style="color: #9bb5dd; font-size: 1rem;">Учусь &bull; создаю &bull; разбираю</div>
+          <div style="font-weight: 600; font-size: 1.3rem; color: #e0edff;">Автомеханик</div>
+          <div style="color: #9bb5dd; font-size: 0.9rem;">Учусь &bull; создаю &bull; разбираю</div>
         </div>
       </div>
       <div class="scroll-hint" id="scrollHint"><span>Листай вниз</span><i class="fas fa-chevron-down"></i></div>
@@ -224,7 +252,7 @@
         <div class="card">
           <div class="card-icon"><i class="fas fa-camera-retro"></i></div>
           <h3>Фотографии</h3>
-          <p>Красивые снимки на фотик: природа, urban, портреты. Ловлю свет и тени.</p>
+          <p>Красивые снимки на фотик: природа, urban, портреты.</p>
           <div class="hobby-list">
             <span class="hobby-tag" onclick="openGallery()" style="cursor: pointer;"><i class="fas fa-image"></i> Кадры</span>
             <span class="hobby-tag" onclick="openSales()" style="cursor: pointer;"><i class="fas fa-tag"></i> Продажи</span>
@@ -233,7 +261,7 @@
         <div class="card">
           <div class="card-icon"><i class="fas fa-cube"></i></div>
           <h3>3D моделирование</h3>
-          <p>Создаю детали, объекты, экспериментирую с формами. Blender и не только.</p>
+          <p>Создаю детали, объекты, экспериментирую с формами.</p>
           <div class="hobby-list">
             <span class="hobby-tag"><i class="fas fa-paint-brush"></i> Дизайн</span>
             <span class="hobby-tag"><i class="fas fa-shopping-cart"></i> Продажа</span>
@@ -242,75 +270,11 @@
         <div class="card">
           <div class="card-icon"><i class="fas fa-chart-line"></i></div>
           <h3>Фондовый рынок</h3>
-          <p>Изучаю акции, облигации, ETF. Анализирую графики и новости компаний.</p>
+          <p>Изучаю акции, облигации, ETF. Анализирую рынок.</p>
           <div class="hobby-list">
             <a href="https://www.tbank.ru/invest/social/profile/ANADE?author=profile" target="_blank" class="hobby-tag" style="text-decoration: none; cursor: pointer;"><i class="fas fa-broadcast-tower"></i> Пульс</a>
             <span class="hobby-tag" onclick="openMoex()" style="cursor: pointer;"><i class="fas fa-globe"></i> MOEX</span>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- УЧЁБА И АВТОМЕХАНИКА -->
-    <section>
-      <div class="section-title"><i class="fas fa-graduation-cap"></i> Образование &amp; мастерство</div>
-      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
-        <div style="flex: 1; min-width: 260px;">
-          <div class="card" style="height: 100%;">
-            <div class="card-icon"><i class="fas fa-car"></i></div>
-            <h3>Автомеханик</h3>
-            <p style="margin-bottom: 0.5rem;">Специальность: в процессе обучения</p>
-          </div>
-        </div>
-        <div style="flex: 1; min-width: 260px;">
-          <div style="background: rgba(255,255,255,0.02); border-radius: 2rem; padding: 2rem; backdrop-filter: blur(12px);">
-            <i class="fas fa-quote-right" style="font-size: 2rem; color: #3b6cb7; opacity: 0.8;"></i>
-            <p class="quote">«С детства крутил гайки, теперь превращаю хобби в профессию. Техника для меня — искусство.»</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- КУЛЬТУРА JDM -->
-    <section>
-      <div class="section-title"><i class="fas fa-car-side"></i> Культура JDM</div>
-      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
-        <div style="flex: 1; min-width: 260px;">
-          <div class="card" style="height: 100%;">
-            <div class="card-icon"><i class="fas fa-flag"></i></div>
-            <h3>Культура JDM</h3>
-            <p style="margin-bottom: 0.5rem;">Японский автопром и его наследие.</p>
-            <div class="hobby-list">
-              <span class="hobby-tag" onclick="openJdmModal(1)" style="cursor: pointer;"><i class="fas fa-info-circle"></i> О культуре</span>
-              <span class="hobby-tag" onclick="openJdmModal(2)" style="cursor: pointer;"><i class="fas fa-history"></i> История</span>
-              <span class="hobby-tag" onclick="openJdmModal(3)" style="cursor: pointer;"><i class="fas fa-cogs"></i> Отличит. черты</span>
-              <span class="hobby-tag" onclick="openJdmModal(4)" style="cursor: pointer;"><i class="fas fa-star"></i> Популярные авто</span>
-            </div>
-          </div>
-        </div>
-        <div style="flex: 1; min-width: 260px;">
-          <div id="jdmQuoteBlock" style="background: rgba(255,255,255,0.02); border-radius: 2rem; padding: 2rem; backdrop-filter: blur(12px); cursor: pointer; transition: 0.3s;" onclick="smokeEffect(event)" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">
-            <i class="fas fa-quote-right" style="font-size: 2rem; color: #e0556a; opacity: 0.8;"></i>
-            <p class="quote">«JDM — это не просто автомобили, а целая философия японского автопрома.»</p>
-            <p style="color: #607494; font-size: 0.8rem; margin-top: 0.5rem;">Нажми на цитату 🔥</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 3D И ТВОРЧЕСТВО -->
-    <section>
-      <div class="section-title"><i class="fas fa-project-diagram"></i> 3D мир &amp; визуал</div>
-      <div class="grid">
-        <div class="card">
-          <div class="card-icon"><i class="fas fa-gem"></i></div>
-          <h3>Blender</h3>
-          <p>Моделирую механические детали, окружение, иногда персонажей. Работаю с текстурами и светом.</p>
-        </div>
-        <div class="card">
-          <div class="card-icon"><i class="fas fa-cubes"></i></div>
-          <h3>3D моделирование</h3>
-          <p>Создаю трёхмерные объекты для игр, печати и визуализаций.</p>
         </div>
       </div>
     </section>
@@ -323,13 +287,19 @@
           <div class="card-icon"><i class="fas fa-laptop-code"></i></div>
           <h3>Лендинг</h3>
           <p>Одностраничный сайт для бизнеса. Идеально для старта.</p>
-          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-ruble-sign"></i> от 5 000 ₽</span></div>
+          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-ruble-sign"></i> от 2 000 ₽</span></div>
         </div>
         <div class="card">
           <div class="card-icon"><i class="fas fa-globe"></i></div>
           <h3>Сайт-визитка</h3>
           <p>Многостраничный сайт с портфолио и контактами.</p>
-          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-ruble-sign"></i> от 8 000 ₽</span></div>
+          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-ruble-sign"></i> от 2 500 ₽</span></div>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-shopping-bag"></i></div>
+          <h3>Интернет-магазин</h3>
+          <p>Полноценный магазин с корзиной и оплатой.</p>
+          <div class="hobby-list"><span class="hobby-tag"><i class="fas fa-ruble-sign"></i> от 5 000 ₽</span></div>
         </div>
         <div class="card">
           <div class="card-icon"><i class="fas fa-calculator"></i></div>
@@ -337,59 +307,118 @@
           <p>Рассчитай стоимость своего сайта.</p>
           <div class="hobby-list"><span class="hobby-tag" onclick="openCalculator()" style="cursor: pointer;"><i class="fas fa-sliders-h"></i> Рассчитать</span></div>
         </div>
-        <div class="card" style="cursor: pointer;">
-          <div class="card-icon"><i class="fas fa-heart"></i></div>
-          <h3>Поддержать</h3>
-          <p>Если хочешь поддержать моё творчество.</p>
-          <div class="hobby-list"><span class="hobby-tag" onclick="alert('Спасибо! Скоро добавлю ссылку на донат ❤️')"><i class="fas fa-coffee"></i> На кофе</span></div>
+      </div>
+    </section>
+
+    <!-- УЧЁБА И АВТОМЕХАНИКА -->
+    <section>
+      <div class="section-title"><i class="fas fa-graduation-cap"></i> Образование &amp; мастерство</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center;">
+        <div style="flex: 1; min-width: 240px;">
+          <div class="card" style="height: 100%;">
+            <div class="card-icon"><i class="fas fa-car"></i></div>
+            <h3>Автомеханик</h3>
+            <p style="margin-bottom: 0.5rem;">Специальность: в процессе обучения</p>
+          </div>
+        </div>
+        <div style="flex: 1; min-width: 240px;">
+          <div style="background: rgba(255,255,255,0.02); border-radius: 1.5rem; padding: 1.5rem; backdrop-filter: blur(12px);">
+            <i class="fas fa-quote-right" style="font-size: 1.5rem; color: #3b6cb7; opacity: 0.8;"></i>
+            <p class="quote">«С детства крутил гайки, теперь превращаю хобби в профессию. Техника для меня — искусство.»</p>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ФОНДОВЫЙ РЫНОК -->
+    <!-- 3D И ТВОРЧЕСТВО -->
+    <section>
+      <div class="section-title"><i class="fas fa-project-diagram"></i> 3D мир &amp; визуал</div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-gem"></i></div>
+          <h3>Blender</h3>
+          <p>Моделирую механические детали, окружение, персонажей.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-cubes"></i></div>
+          <h3>3D моделирование</h3>
+          <p>Создаю объекты для игр, печати и визуализаций.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ИНВЕСТИЦИИ И РЫНОК -->
     <section>
       <div class="section-title"><i class="fas fa-coins"></i> Инвестиции &amp; рынок</div>
-      <div style="display: flex; flex-wrap: wrap; gap: 2rem;">
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem;">
         <div class="card" style="flex: 1;">
           <div class="card-icon"><i class="fas fa-book-open"></i></div>
           <h3>Изучаю</h3>
-          <p>Технический и фундаментальный анализ. Слежу за индексом МосБиржи, SP500. Читаю отчеты.</p>
+          <p>Технический и фундаментальный анализ. МосБиржа, SP500.</p>
         </div>
         <div class="card" style="flex: 1;">
           <div class="card-icon"><i class="fas fa-chart-bar"></i></div>
           <h3>Практика</h3>
-          <p>Виртуальный портфель, дневник сделок. Разбираюсь в рисках и диверсификации.</p>
+          <p>Виртуальный портфель, дневник сделок, диверсификация.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- КУЛЬТУРА JDM -->
+    <section>
+      <div class="section-title"><i class="fas fa-car-side"></i> Культура JDM</div>
+      <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center;">
+        <div style="flex: 1; min-width: 240px;">
+          <div class="card" style="height: 100%;">
+            <div class="card-icon"><i class="fas fa-flag"></i></div>
+            <h3>Культура JDM</h3>
+            <p style="margin-bottom: 0.3rem;">Японский автопром и его наследие.</p>
+            <div class="hobby-list">
+              <span class="hobby-tag" onclick="openJdmModal(1)" style="cursor: pointer;"><i class="fas fa-info-circle"></i> О культуре</span>
+              <span class="hobby-tag" onclick="openJdmModal(2)" style="cursor: pointer;"><i class="fas fa-history"></i> История</span>
+              <span class="hobby-tag" onclick="openJdmModal(3)" style="cursor: pointer;"><i class="fas fa-cogs"></i> Черты</span>
+              <span class="hobby-tag" onclick="openJdmModal(4)" style="cursor: pointer;"><i class="fas fa-star"></i> Авто</span>
+            </div>
+          </div>
+        </div>
+        <div style="flex: 1; min-width: 240px;">
+          <div id="jdmQuoteBlock" style="background: rgba(255,255,255,0.02); border-radius: 1.5rem; padding: 1.5rem; backdrop-filter: blur(12px); cursor: pointer; transition: 0.3s; text-align: center;" onclick="smokeEffect(event)" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='rgba(255,255,255,0.02)'">
+            <i class="fas fa-quote-right" style="font-size: 1.5rem; color: #e0556a; opacity: 0.8;"></i>
+            <p class="quote">«JDM — это не просто автомобили, а целая философия японского автопрома.»</p>
+            <p style="color: #607494; font-size: 0.75rem; margin-top: 0.3rem;">Нажми на цитату 🔥</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- КОНТАКТЫ -->
-    <section style="padding-bottom: 2rem;">
+    <section style="padding-bottom: 1.5rem;">
       <div class="section-title"><i class="fas fa-address-card"></i> Связь и контакты</div>
-      <div style="background: rgba(15,20,32,0.7); backdrop-filter: blur(20px); border-radius: 3rem; padding: 2.5rem; display: flex; flex-wrap: wrap; align-items: center; gap: 2rem; box-shadow: 0 25px 45px -10px black;">
-        <div style="display: flex; align-items: center; gap: 1.5rem;">
-          <div class="avatar-placeholder" style="width: 90px; height: 90px; margin-bottom: 0; background: transparent; overflow: hidden; padding: 0; box-shadow: 0 10px 25px rgba(0,180,255,0.3);">
+      <div style="background: rgba(15,20,32,0.7); backdrop-filter: blur(20px); border-radius: 2rem; padding: 1.8rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; box-shadow: 0 20px 40px -8px black;">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div class="avatar-placeholder" style="width: 60px; height: 60px; margin-bottom: 0; background: transparent; overflow: hidden; padding: 0; box-shadow: 0 8px 20px rgba(0,180,255,0.3);">
             <img src="avatar.jpg" alt="Глеб" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%; display: block;">
           </div>
           <div>
-            <h3 style="font-size: 1.8rem; margin:0;">Глеб</h3>
-            <p style="color:#b0c7e5;">Нижний Тагил · 17 лет</p>
+            <h3 style="font-size: 1.3rem; margin:0;">Глеб</h3>
+            <p style="color:#b0c7e5; font-size: 0.85rem;">Нижний Тагил · 17 лет</p>
           </div>
         </div>
-        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+        <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
           <a href="https://vk.com/id639317163" target="_blank" class="hobby-tag" style="text-decoration: none; cursor: pointer;"><i class="fab fa-vk"></i> ВКонтакте</a>
           <a href="https://t.me/anade17" target="_blank" class="hobby-tag" style="text-decoration: none; cursor: pointer;"><i class="fab fa-telegram"></i> @anade17</a>
           <a href="mailto:sgleb0451@gmail.com" class="hobby-tag" style="text-decoration: none; cursor: pointer;"><i class="fas fa-envelope"></i> sgleb0451@gmail.com</a>
         </div>
       </div>
+      <p style="text-align: center; margin-top: 1.5rem; color: #607494; font-size: 0.9rem;">Всегда открыт к новым проектам и знакомствам 🚀</p>
     </section>
 
     <div class="footer">
-      <p>© 2025 Глеб — автомеханик, геймер, 3D-энтузиаст.</p>
-      <p style="margin-top: 0.7rem;"><i class="fas fa-map-pin"></i> Нижний Тагил · Создаю будущее своими руками</p>
-      <div style="margin-top: 1.2rem;">
+      <p>© 2026 Глеб — автомеханик, геймер, 3D-энтузиаст.</p>
+      <p style="margin-top: 0.4rem;"><i class="fas fa-map-pin"></i> Нижний Тагил · Создаю будущее своими руками</p>
+      <div style="margin-top: 1rem;">
         <a href="https://www.hitwebcounter.com/" target="_blank" rel="noopener" title="Stats Check">
-        <img src="https://www.hitwebcounter.com/counter/counter.php?page=21497087&amp;style=0036&amp;nbdigits=5&amp;type=page" alt="Stats Check" decoding="async" style="border:0;max-width:100%;height:auto;" />
+        <img src="https://www.hitwebcounter.com/counter/counter.php?page=21498555&amp;style=0001&amp;nbdigits=5&amp;type=page" alt="Stats Check" decoding="async" style="border:0;max-width:100%;height:auto;" />
         </a>
       </div>
     </div>
@@ -397,78 +426,95 @@
   </div>
 
   <!-- МОДАЛКИ -->
-  <div id="photoViewer"><button class="close-viewer" onclick="closePhotoViewer()">&times;</button><img id="photoViewerImg" src="" alt="Фото"></div>
+  <div id="photoViewer" class="modal-overlay flex" onclick="closePhotoViewer()">
+    <button class="modal-close" onclick="closePhotoViewer()">&times;</button>
+    <img id="photoViewerImg" src="" alt="Фото" onclick="event.stopPropagation()">
+  </div>
 
-  <div id="shootersModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
-    <div style="max-width: 800px; width: 100%; text-align: center; position: relative;">
-      <button onclick="closeShooters()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer; backdrop-filter: blur(10px); z-index: 10;">&times;</button>
-      <h2 style="color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2rem;"><i class="fas fa-crosshairs" style="color: #4d8eff;"></i>Шутеры</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center;">
-        <div onclick="window.open('https://tracker.gg/valorant/profile/riot/ANADE%23ANADE/overview?platform=pc&playlist=unrated','_blank')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; width: 300px;"><div style="height: 200px; background: #0d1117;"><img src="valorant.jpg" alt="Valorant" style="width: 100%; height: 100%; object-fit: cover;"></div><div style="padding: 1rem; color: #f0f6ff; font-weight: 600;">Valorant</div></div>
-        <div onclick="alert('Скоро добавлю ссылку на Apex Legends! 🔜')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; width: 300px;"><div style="height: 200px; background: #0d1117;"><img src="apex.jpg" alt="Apex" style="width: 100%; height: 100%; object-fit: cover;"></div><div style="padding: 1rem; color: #f0f6ff; font-weight: 600;">Apex Legends</div></div>
+  <div id="shootersModal" class="modal-overlay flex">
+    <div style="max-width: 700px; width: 100%; text-align: center;">
+      <button class="modal-close" onclick="closeShooters()">&times;</button>
+      <h2 style="color: #dfe9ff; font-size: 1.8rem; margin-bottom: 1.5rem;"><i class="fas fa-crosshairs" style="color: #4d8eff;"></i> Шутеры</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 1.2rem; justify-content: center;">
+        <div onclick="window.open('https://tracker.gg/valorant/profile/riot/ANADE%23ANADE/overview?platform=pc&playlist=unrated','_blank')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.2rem; overflow: hidden; width: 250px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="height: 160px; background: #0d1117;"><img src="valorant.jpg" alt="Valorant" style="width: 100%; height: 100%; object-fit: cover;"></div>
+          <div style="padding: 0.8rem; color: #f0f6ff; font-weight: 600;">Valorant</div>
+        </div>
+        <div onclick="alert('Скоро добавлю ссылку на Apex Legends! 🔜')" style="cursor: pointer; background: rgba(255,255,255,0.03); border-radius: 1.2rem; overflow: hidden; width: 250px; transition: 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+          <div style="height: 160px; background: #0d1117;"><img src="apex.jpg" alt="Apex" style="width: 100%; height: 100%; object-fit: cover;"></div>
+          <div style="padding: 0.8rem; color: #f0f6ff; font-weight: 600;">Apex Legends</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div id="setupModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
-    <div style="background: rgba(20,25,38,0.95); border-radius: 3rem; padding: 3rem; max-width: 550px; text-align: center;">
-      <button onclick="closeSetup()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">&times;</button>
-      <i class="fas fa-microchip" style="font-size: 4rem; color: #ffb84d;"></i>
-      <h3 style="font-size: 2rem; color: #f0f6ff; margin: 1rem 0;">Мой игровой сетап</h3>
-      <p style="color: #b4c4dd;">Скоро добавлю фотографии своих гаджетов! 🖥️🎮</p>
+  <div id="setupModal" class="modal-overlay flex">
+    <div style="background: rgba(20,25,38,0.95); border-radius: 2rem; padding: 2rem; max-width: 450px; text-align: center;">
+      <button class="modal-close" onclick="closeSetup()">&times;</button>
+      <i class="fas fa-microchip" style="font-size: 3rem; color: #ffb84d;"></i>
+      <h3 style="font-size: 1.5rem; color: #f0f6ff; margin: 0.8rem 0;">Мой игровой сетап</h3>
+      <p style="color: #b4c4dd; font-size: 0.95rem;">Скоро добавлю фотографии своих гаджетов! 🖥️🎮</p>
     </div>
   </div>
 
-  <div id="galleryModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
-    <div style="max-width: 1200px; margin: 0 auto;">
-      <button onclick="closeGallery()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer;">&times;</button>
-      <h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2rem;"><i class="fas fa-images" style="color: #4d8eff;"></i> Мои фотографии</h2>
-      <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;"></div>
+  <div id="galleryModal" class="modal-overlay">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <button class="modal-close" onclick="closeGallery()">&times;</button>
+      <h2 style="text-align: center; color: #dfe9ff; font-size: 1.8rem; margin-bottom: 1.5rem;"><i class="fas fa-images" style="color: #4d8eff;"></i> Мои фотографии</h2>
+      <div id="galleryGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem;"></div>
     </div>
   </div>
 
-  <div id="salesModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
-    <div style="background: rgba(20,25,38,0.95); border-radius: 3rem; padding: 3rem; max-width: 550px; text-align: center;">
-      <button onclick="closeSales()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">&times;</button>
-      <i class="fas fa-smile-wink" style="font-size: 4rem; color: #ffb84d;"></i>
-      <h3 style="font-size: 2rem; color: #f0f6ff;">Пока ничего не продано</h3>
+  <div id="salesModal" class="modal-overlay flex">
+    <div style="background: rgba(20,25,38,0.95); border-radius: 2rem; padding: 2rem; max-width: 450px; text-align: center;">
+      <button class="modal-close" onclick="closeSales()">&times;</button>
+      <i class="fas fa-smile-wink" style="font-size: 3rem; color: #ffb84d;"></i>
+      <h3 style="font-size: 1.5rem; color: #f0f6ff; margin: 0.8rem 0;">Пока ничего не продано</h3>
       <p style="color: #b4c4dd;">Но скоро обязательно продам! 😊</p>
     </div>
   </div>
 
-  <div id="moexModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
-    <div style="max-width: 1100px; margin: 0 auto;">
-      <button onclick="closeMoex()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer;">&times;</button>
-      <h2 style="text-align: center; color: #dfe9ff; font-size: 2.2rem; margin-bottom: 2rem;"><i class="fas fa-chart-bar" style="color: #4d8eff;"></i> Мой портфель MOEX</h2>
-      <div id="moexGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem;"></div>
-      <div style="text-align: center; margin-top: 2rem;">
-        <a href="https://www.tbank.ru/invest/stocks/?start=0&end=12&orderType=Desc&sortType=ByPopularity&exchange=MOEX" target="_blank" class="hobby-tag" style="text-decoration: none; font-size: 1.05rem; padding: 0.8rem 2rem;"><i class="fas fa-external-link-alt"></i> Смотреть все акции MOEX</a>
+  <div id="moexModal" class="modal-overlay">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <button class="modal-close" onclick="closeMoex()">&times;</button>
+      <h2 style="text-align: center; color: #dfe9ff; font-size: 1.8rem; margin-bottom: 1.5rem;"><i class="fas fa-chart-bar" style="color: #4d8eff;"></i> Мой портфель MOEX</h2>
+      <div id="moexGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.8rem;"></div>
+      <div style="text-align: center; margin-top: 1.5rem;">
+        <a href="https://www.tbank.ru/invest/stocks/?start=0&end=12&orderType=Desc&sortType=ByPopularity&exchange=MOEX" target="_blank" class="hobby-tag" style="text-decoration: none; font-size: 0.9rem; padding: 0.6rem 1.5rem;"><i class="fas fa-external-link-alt"></i> Смотреть все акции MOEX</a>
       </div>
     </div>
   </div>
 
-  <div id="jdmModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; overflow-y: auto; padding: 3rem 1rem;">
-    <div style="max-width: 1000px; margin: 0 auto;">
-      <button onclick="closeJdm()" style="position: fixed; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 55px; height: 55px; border-radius: 50%; cursor: pointer;">&times;</button>
+  <div id="jdmModal" class="modal-overlay">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <button class="modal-close" onclick="closeJdm()">&times;</button>
       <div id="jdmContent"></div>
     </div>
   </div>
 
-  <div id="calcModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; padding: 2rem;">
-    <div style="background: rgba(20,25,38,0.95); border-radius: 3rem; padding: 3rem; max-width: 600px; width: 100%;">
-      <button onclick="closeCalculator()" style="position: absolute; top: 20px; right: 20px; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 2rem; width: 50px; height: 50px; border-radius: 50%; cursor: pointer;">&times;</button>
-      <h2 style="color: #dfe9ff; font-size: 2rem; text-align: center; margin-bottom: 2rem;"><i class="fas fa-calculator" style="color: #4d8eff;"></i> Калькулятор стоимости</h2>
+  <div id="calcModal" class="modal-overlay flex">
+    <div style="background: rgba(20,25,38,0.95); border-radius: 2rem; padding: 2rem; max-width: 500px; width: 100%;">
+      <button class="modal-close" onclick="closeCalculator()">&times;</button>
+      <h2 style="color: #dfe9ff; font-size: 1.5rem; text-align: center; margin-bottom: 1.5rem;"><i class="fas fa-calculator" style="color: #4d8eff;"></i> Калькулятор стоимости</h2>
       <div id="calcForm"></div>
+    </div>
+  </div>
+
+  <div id="supportModal" class="modal-overlay flex">
+    <div style="background: rgba(20,25,38,0.95); border-radius: 2rem; padding: 2rem; max-width: 400px; text-align: center;">
+      <button class="modal-close" onclick="closeSupport()">&times;</button>
+      <i class="fas fa-heart" style="font-size: 3rem; color: #e0556a;"></i>
+      <h3 style="font-size: 1.5rem; color: #f0f6ff; margin: 0.8rem 0;">Хочешь поддержать меня?</h3>
+      <p style="color: #b4c4dd; margin-bottom: 1.2rem;">Твоя поддержка помогает мне развиваться и создавать больше крутых проектов!</p>
+      <a href="https://www.donationalerts.com/r/anade8829" target="_blank" class="hobby-tag" style="text-decoration: none; cursor: pointer; font-size: 1rem; padding: 0.7rem 2rem; display: inline-flex;"><i class="fas fa-coffee"></i> На чай ☕</a>
     </div>
   </div>
 
   <script>
     // Приветствие
-    setTimeout(() => {
-      document.getElementById('greeting').classList.add('hidden');
-    }, 2000);
+    setTimeout(() => document.getElementById('greeting').classList.add('hidden'), 2000);
 
-    // UTM-метки
+    // UTM
     const params = new URLSearchParams(window.location.search);
     if (params.get('utm') === '3d') {
       document.getElementById('heroTitle').textContent = 'Создам 3D-модель на заказ';
@@ -483,15 +529,15 @@
       const rect = document.getElementById('jdmQuoteBlock').getBoundingClientRect();
       const cx = rect.left + rect.width / 2;
       const cy = rect.top + rect.height / 2;
-      for (let i = 0; i < 15; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'smoke-particle';
-        particle.style.left = cx + 'px';
-        particle.style.top = cy + 'px';
-        particle.style.setProperty('--dx', (Math.random() - 0.5) * 200 + 'px');
-        particle.style.setProperty('--dy', -(Math.random() * 150 + 50) + 'px');
-        document.body.appendChild(particle);
-        setTimeout(() => particle.remove(), 1500);
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('div');
+        p.className = 'smoke-particle';
+        p.style.left = cx + 'px';
+        p.style.top = cy + 'px';
+        p.style.setProperty('--dx', (Math.random() - 0.5) * 250 + 'px');
+        p.style.setProperty('--dy', -(Math.random() * 180 + 60) + 'px');
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 1500);
       }
     }
 
@@ -502,58 +548,47 @@
 
     // Exit intent
     let exitShown = false;
-    document.addEventListener('mouseout', function(e) {
+    document.addEventListener('mouseout', e => {
       if (e.clientY < 10 && !exitShown) {
         exitShown = true;
         setTimeout(() => {
           if (confirm('⚡ Не уходи! Скидка 10% на первый заказ сайта. Остаться?')) {
-            document.getElementById('heroTitle').scrollIntoView({ behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
           }
         }, 500);
       }
     });
 
+    // Поддержка
+    function openSupport() { document.getElementById('supportModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    function closeSupport() { document.getElementById('supportModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    document.getElementById('supportModal').addEventListener('click', function(e) { if (e.target === this) closeSupport(); });
+
     // Калькулятор
     function openCalculator() {
-      document.getElementById('calcModal').style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-      const form = document.getElementById('calcForm');
-      form.innerHTML = `
-        <div style="margin-bottom: 1.5rem;">
-          <label style="color: #b4c4dd;">Тип сайта</label>
-          <select id="calcType" style="width: 100%; padding: 0.8rem; background: #1a1e2b; color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; margin-top: 0.5rem;">
-            <option value="5000">Лендинг (5 000 ₽)</option>
-            <option value="8000">Сайт-визитка (8 000 ₽)</option>
-            <option value="15000">Интернет-магазин (15 000 ₽)</option>
-          </select>
-        </div>
-        <div style="margin-bottom: 1.5rem;">
-          <label style="color: #b4c4dd;">Срочность</label>
-          <select id="calcUrgency" style="width: 100%; padding: 0.8rem; background: #1a1e2b; color: white; border: 1px solid rgba(255,255,255,0.1); border-radius: 1rem; margin-top: 0.5rem;">
-            <option value="1">Стандарт (x1)</option>
-            <option value="1.5">Срочно (x1.5)</option>
-            <option value="2">Супер-срочно (x2)</option>
-          </select>
-        </div>
-        <div style="text-align: center; font-size: 1.5rem; color: #f0f6ff; padding: 1.5rem; background: rgba(77,142,255,0.1); border-radius: 1rem;">
-          Итого: <span id="calcResult" style="color: #4d8eff; font-weight: 700;">5 000</span> ₽
-        </div>
-      `;
-      function updateCalc() {
-        const base = parseInt(document.getElementById('calcType').value);
-        const urgency = parseFloat(document.getElementById('calcUrgency').value);
-        document.getElementById('calcResult').textContent = (base * urgency).toLocaleString();
-      }
+      document.getElementById('calcModal').style.display = 'flex'; document.body.style.overflow = 'hidden';
+      const f = document.getElementById('calcForm');
+      f.innerHTML = `
+        <div style="margin-bottom: 1rem;"><label style="color:#b4c4dd;font-size:0.9rem;">Тип сайта</label>
+          <select id="calcType" style="width:100%;padding:0.7rem;background:#1a1e2b;color:white;border:1px solid rgba(255,255,255,0.1);border-radius:0.8rem;margin-top:0.3rem;">
+            <option value="2000">Лендинг (2 000 ₽)</option><option value="2500">Сайт-визитка (2 500 ₽)</option><option value="5000">Интернет-магазин (5 000 ₽)</option>
+          </select></div>
+        <div style="margin-bottom:1rem;"><label style="color:#b4c4dd;font-size:0.9rem;">Срочность</label>
+          <select id="calcUrgency" style="width:100%;padding:0.7rem;background:#1a1e2b;color:white;border:1px solid rgba(255,255,255,0.1);border-radius:0.8rem;margin-top:0.3rem;">
+            <option value="1">Стандарт (x1)</option><option value="1.5">Срочно (x1.5)</option><option value="2">Супер-срочно (x2)</option>
+          </select></div>
+        <div style="text-align:center;font-size:1.3rem;color:#f0f6ff;padding:1rem;background:rgba(77,142,255,0.1);border-radius:0.8rem;">
+          Итого: <span id="calcResult" style="color:#4d8eff;font-weight:700;">2 000</span> ₽</div>`;
       document.getElementById('calcType').addEventListener('change', updateCalc);
       document.getElementById('calcUrgency').addEventListener('change', updateCalc);
     }
-    function closeCalculator() {
-      document.getElementById('calcModal').style.display = 'none';
-      document.body.style.overflow = 'auto';
+    function updateCalc() {
+      document.getElementById('calcResult').textContent = (parseInt(document.getElementById('calcType').value) * parseFloat(document.getElementById('calcUrgency').value)).toLocaleString();
     }
+    function closeCalculator() { document.getElementById('calcModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
     document.getElementById('calcModal').addEventListener('click', function(e) { if (e.target === this) closeCalculator(); });
 
-    // Заглушки модалок
+    // Заглушки
     function openShooters() { document.getElementById('shootersModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
     function closeShooters() { document.getElementById('shootersModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
     function openSetup() { document.getElementById('setupModal').style.display = 'flex'; document.body.style.overflow = 'hidden'; }
@@ -566,91 +601,38 @@
     // Галерея
     const photos = ["1000005750.jpg","1000004179.jpg","1000005761.jpg","1000004174.jpg","1000004097.jpg","1000004163.jpg","1000004161.jpg","1000005749.jpg","1000005764.jpg","1000004165.jpg","1000004162.jpg","1000004167.jpg","1000005760.jpg","1000004100.jpg","1000004164.jpg","1000004169.jpg","1000004171.jpg","1000004166.jpg","1000005763.jpg","1000004168.jpg"];
     function openGallery() {
-      const grid = document.getElementById('galleryGrid');
-      grid.innerHTML = '';
-      photos.forEach(p => {
-        const card = document.createElement('div');
-        card.style.cssText = 'background: rgba(255,255,255,0.03); border-radius: 1.5rem; overflow: hidden; cursor: pointer;';
-        card.innerHTML = `<div style="height: 260px; background: #0d1117;"><img src="${p}" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'"></div><div style="padding: 0.9rem; color: #8b9cbb; font-size: 0.85rem; text-align: center;">${p}</div>`;
-        card.onclick = () => openPhotoViewer(p);
-        grid.appendChild(card);
-      });
+      document.getElementById('galleryGrid').innerHTML = photos.map(p => `<div style="background:rgba(255,255,255,0.03);border-radius:1rem;overflow:hidden;cursor:pointer;" onclick="openPhotoViewer('${p}')"><div style="height:200px;background:#0d1117;"><img src="${p}" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none'"></div><div style="padding:0.6rem;color:#8b9cbb;font-size:0.75rem;text-align:center;">${p}</div></div>`).join('');
       document.getElementById('galleryModal').style.display = 'block'; document.body.style.overflow = 'hidden';
     }
     function closeGallery() { document.getElementById('galleryModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
     // MOEX
     const stocks = [
-      { name: "Сбербанк", ticker: "SBER", price: "323,8 ₽", profit: "+6,92%", positive: true },
-      { name: "Газпром", ticker: "GAZP", price: "120,47 ₽", profit: "−0,71%", positive: false },
-      { name: "ВТБ", ticker: "VTBR", price: "92,97 ₽", profit: "+32,45%", positive: true },
-      { name: "Роснефть", ticker: "ROSN", price: "413,65 ₽", profit: "+6%", positive: true },
-      { name: "Самолёт", ticker: "SMLT", price: "580,6 ₽", profit: "−33,17%", positive: false },
-      { name: "Полюс", ticker: "PLZL", price: "2169,6 ₽", profit: "+0,58%", positive: true },
-      { name: "Новатэк", ticker: "NVTK", price: "1163,9 ₽", profit: "+6,76%", positive: true },
-      { name: "OZON", ticker: "OZON", price: "4221 ₽", profit: "+5,03%", positive: true },
-      { name: "Т-Технологии", ticker: "T", price: "310,78 ₽", profit: "+4%", positive: true },
-      { name: "ЭсЭфАй", ticker: "SFIN", price: "1020,6 ₽", profit: "−26,37%", positive: false },
-      { name: "Астра", ticker: "ASTR", price: "277,25 ₽", profit: "−8,32%", positive: false }
-    ];
+      { n:"Сбербанк",t:"SBER",p:"323,8 ₽",pr:"+6,92%",pos:true},{ n:"Газпром",t:"GAZP",p:"120,47 ₽",pr:"−0,71%",pos:false},{ n:"ВТБ",t:"VTBR",p:"92,97 ₽",pr:"+32,45%",pos:true},{ n:"Роснефть",t:"ROSN",p:"413,65 ₽",pr:"+6%",pos:true},{ n:"Самолёт",t:"SMLT",p:"580,6 ₽",pr:"−33,17%",pos:false},{ n:"Полюс",t:"PLZL",p:"2169,6 ₽",pr:"+0,58%",pos:true},{ n:"Новатэк",t:"NVTK",p:"1163,9 ₽",pr:"+6,76%",pos:true},{ n:"OZON",t:"OZON",p:"4221 ₽",pr:"+5,03%",pos:true},{ n:"Т-Технологии",t:"T",p:"310,78 ₽",pr:"+4%",pos:true},{ n:"ЭсЭфАй",t:"SFIN",p:"1020,6 ₽",pr:"−26,37%",pos:false},{ n:"Астра",t:"ASTR",p:"277,25 ₽",pr:"−8,32%",pos:false}];
     function openMoex() {
-      const grid = document.getElementById('moexGrid');
-      grid.innerHTML = '';
-      stocks.forEach(s => {
-        const card = document.createElement('div');
-        card.style.cssText = 'background: rgba(18,23,35,0.9); border-radius: 1.5rem; padding: 1.3rem; text-align: center;';
-        card.innerHTML = `<div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,${s.positive?'#4caf8433':'#e0556a33'},#1a1e2b);margin:0 auto;display:flex;align-items:center;justify-content:center;font-weight:700;">${s.ticker[0]}</div><div style="color:#f0f6ff;font-weight:600;margin-top:0.5rem;">${s.name}</div><div style="color:#7b8ca8;font-size:0.8rem;">${s.ticker}</div><div style="color:#cfdefa;">${s.price}</div><div style="color:${s.positive?'#4caf84':'#e0556a'};font-weight:600;">${s.profit}</div>`;
-        grid.appendChild(card);
-      });
+      document.getElementById('moexGrid').innerHTML = stocks.map(s => `<div style="background:rgba(18,23,35,0.9);border-radius:1rem;padding:1rem;text-align:center;"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,${s.pos?'#4caf8433':'#e0556a33'},#1a1e2b);margin:0 auto;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.9rem;">${s.t[0]}</div><div style="color:#f0f6ff;font-weight:600;margin-top:0.4rem;font-size:0.9rem;">${s.n}</div><div style="color:#7b8ca8;font-size:0.7rem;">${s.t}</div><div style="color:#cfdefa;font-size:0.85rem;">${s.p}</div><div style="color:${s.pos?'#4caf84':'#e0556a'};font-weight:600;font-size:0.85rem;">${s.pr}</div></div>`).join('');
       document.getElementById('moexModal').style.display = 'block'; document.body.style.overflow = 'hidden';
     }
     function closeMoex() { document.getElementById('moexModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
 
     // JDM
     const jdmData = [
-      { title: "Немного о культуре JDM", text: "JDM — это не просто автомобили, а целая философия японского автопрома.", photos: ["о культуре.jpg", "о культуре (1).jpg"], descriptions: ["Атмосфера JDM", "Японский стиль"] },
-      { title: "История зарождения", text: "Культура JDM зародилась в Японии в 1980-х годах.", photos: ["зарождение.jpg", "зарождение (1).jpg"], descriptions: ["Первые шаги", "Эволюция стиля"] },
-      { title: "Отличительные черты", items: [
-        { photo: "оч правый руль.jpg", title: "Правый руль", desc: "Особенность JDM-автомобилей для японских дорог." },
-        { photo: "оч стайлинг.jpg", title: "Агрессивный стайлинг", desc: "Низкий профиль, широкие арки, спойлеры." },
-        { photo: "оч турбосторы.jpg", title: "Турбомоторы", desc: "Высокооборотистые двигатели с наддувом." }
-      ]},
-      { title: "Популярные автомобили JDM", items: [
-        { photo: "Skyline R33 R34.jpg", title: "Nissan Skyline GT-R", desc: "Легендарный «Годзилла» с турбомотором RB26DETT." },
-        { photo: "Integra Type R.jpg", title: "Honda Integra Type R", desc: "Переднеприводный спорткар с мотором B18C." },
-        { photo: "Chaser JZX100.jpg", title: "Toyota Chaser JZX100", desc: "Культовый дрифтовый седан с 1JZ-GTE." },
-        { photo: "RX-7.jpg", title: "Mazda RX-7", desc: "Роторный спорткар с двигателем Ванкеля." },
-        { photo: "Impreza 22B.jpg", title: "Subaru Impreza 22B STi", desc: "Ралли-монстр с турбооппозитником." }
-      ]}
-    ];
+      { title:"Немного о культуре JDM",text:"JDM — это не просто автомобили, а целая философия японского автопрома.",photos:["о культуре.jpg","о культуре (1).jpg"],descriptions:["Атмосфера JDM","Японский стиль"]},
+      { title:"История зарождения",text:"Культура JDM зародилась в Японии в 1980-х годах.",photos:["зарождение.jpg","зарождение (1).jpg"],descriptions:["Первые шаги","Эволюция стиля"]},
+      { title:"Отличительные черты",items:[{photo:"оч правый руль.jpg",title:"Правый руль",desc:"Особенность JDM-автомобилей для японских дорог."},{photo:"оч стайлинг.jpg",title:"Агрессивный стайлинг",desc:"Низкий профиль, широкие арки, спойлеры."},{photo:"оч турбосторы.jpg",title:"Турбомоторы",desc:"Высокооборотистые двигатели с наддувом."}]},
+      { title:"Популярные автомобили JDM",items:[{photo:"Skyline R33 R34.jpg",title:"Nissan Skyline GT-R",desc:"Легендарный «Годзилла» с турбомотором RB26DETT."},{photo:"Integra Type R.jpg",title:"Honda Integra Type R",desc:"Переднеприводный спорткар с мотором B18C."},{photo:"Chaser JZX100.jpg",title:"Toyota Chaser JZX100",desc:"Культовый дрифтовый седан с 1JZ-GTE."},{photo:"RX-7.jpg",title:"Mazda RX-7",desc:"Роторный спорткар с двигателем Ванкеля."},{photo:"Impreza 22B.jpg",title:"Subaru Impreza 22B STi",desc:"Ралли-монстр с турбооппозитником."}]}];
     function openJdmModal(i) {
-      const d = jdmData[i-1];
-      let h = `<h2 style="color:#dfe9ff;font-size:2.2rem;text-align:center;margin-bottom:2rem;">${d.title}</h2>`;
-      if (d.text) h += `<p style="color:#b4c4dd;text-align:center;max-width:700px;margin:0 auto 2rem;">${d.text}</p>`;
-      if (d.photos) {
-        h += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;">';
-        d.photos.forEach((p,j) => {
-          h += `<div style="background:rgba(255,255,255,0.03);border-radius:1.5rem;overflow:hidden;"><div style="height:250px;background:#0d1117;"><img src="${p}" style="width:100%;height:100%;object-fit:cover;" onclick="openPhotoViewer(this.src)"></div>`;
-          if (d.descriptions[j]) h += `<div style="padding:1rem;color:#b4c4dd;text-align:center;">${d.descriptions[j]}</div>`;
-          h += '</div>';
-        });
-        h += '</div>';
-      }
-      if (d.items) {
-        d.items.forEach(item => {
-          h += `<div style="display:flex;flex-wrap:wrap;gap:1.5rem;margin-bottom:2rem;background:rgba(255,255,255,0.03);border-radius:1.5rem;padding:1.5rem;align-items:center;">`;
-          h += `<div style="flex:0 0 280px;height:200px;border-radius:1rem;overflow:hidden;"><img src="${item.photo}" style="width:100%;height:100%;object-fit:cover;" onclick="openPhotoViewer(this.src)"></div>`;
-          h += `<div style="flex:1;"><h3 style="color:#f0f6ff;">${item.title}</h3><p style="color:#b4c4dd;">${item.desc}</p></div></div>`;
-        });
-      }
-      document.getElementById('jdmContent').innerHTML = h;
-      document.getElementById('jdmModal').style.display = 'block'; document.body.style.overflow = 'hidden';
+      const d=jdmData[i-1]; let h=`<h2 style="color:#dfe9ff;font-size:1.6rem;text-align:center;margin-bottom:1.5rem;">${d.title}</h2>`;
+      if(d.text) h+=`<p style="color:#b4c4dd;text-align:center;max-width:600px;margin:0 auto 1.5rem;">${d.text}</p>`;
+      if(d.photos){h+='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem;">';d.photos.forEach((p,j)=>{h+=`<div style="background:rgba(255,255,255,0.03);border-radius:1rem;overflow:hidden;"><div style="height:200px;background:#0d1117;"><img src="${p}" style="width:100%;height:100%;object-fit:cover;" onclick="openPhotoViewer(this.src)"></div>`;if(d.descriptions[j])h+=`<div style="padding:0.7rem;color:#b4c4dd;text-align:center;font-size:0.85rem;">${d.descriptions[j]}</div>`;h+='</div>';});h+='</div>';}
+      if(d.items){d.items.forEach(item=>{h+=`<div style="display:flex;flex-wrap:wrap;gap:1rem;margin-bottom:1.2rem;background:rgba(255,255,255,0.03);border-radius:1rem;padding:1rem;align-items:center;"><div style="flex:0 0 200px;height:150px;border-radius:0.8rem;overflow:hidden;"><img src="${item.photo}" style="width:100%;height:100%;object-fit:cover;" onclick="openPhotoViewer(this.src)"></div><div style="flex:1;min-width:180px;"><h3 style="color:#f0f6ff;font-size:1.1rem;">${item.title}</h3><p style="color:#b4c4dd;font-size:0.85rem;">${item.desc}</p></div></div>`;});}
+      document.getElementById('jdmContent').innerHTML=h; document.getElementById('jdmModal').style.display='block'; document.body.style.overflow='hidden';
     }
-    function closeJdm() { document.getElementById('jdmModal').style.display = 'none'; document.body.style.overflow = 'auto'; }
+    function closeJdm(){document.getElementById('jdmModal').style.display='none'; document.body.style.overflow='auto';}
 
     // Закрытие по фону
-    ['shootersModal','setupModal','galleryModal','salesModal','moexModal','jdmModal'].forEach(id => {
-      document.getElementById(id).addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; document.body.style.overflow = 'auto'; });
+    ['shootersModal','setupModal','galleryModal','salesModal','moexModal','jdmModal'].forEach(id=>{
+      document.getElementById(id).addEventListener('click',function(e){if(e.target===this){this.style.display='none';document.body.style.overflow='auto';}});
     });
   </script>
 </body>
