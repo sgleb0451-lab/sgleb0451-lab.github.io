@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Иван Иванов | Сайт-визитка</title>
+    <!-- Подключение шрифта Google Fonts для современного вида -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (бесплатные иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #f8faff 0%, #f0f2f8 100%);
+            color: #1a2c3e;
+            line-height: 1.5;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Карточка профиля */
+        .profile-card {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.2), 0 2px 5px rgba(0,0,0,0.02);
+            overflow: hidden;
+            transition: transform 0.25s ease;
+        }
+
+        /* Верхняя секция с фоном и аватаркой */
+        .hero {
+            background: linear-gradient(135deg, #2b3b4e 0%, #1d2c3a 100%);
+            padding: 2.5rem 2rem 4rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            background: #fff;
+            border-radius: 50%;
+            margin: 0 auto 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.3);
+            border: 4px solid rgba(255,255,240,0.9);
+        }
+
+        .avatar i {
+            font-size: 5rem;
+            color: #2b3b4e;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-tag {
+            color: rgba(255,255,240,0.85);
+            font-size: 1.1rem;
+            font-weight: 500;
+            background: rgba(255,255,255,0.15);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* Основное содержимое */
+        .content {
+            padding: 2rem 2rem 2.5rem 2rem;
+        }
+
+        /* Блок "Обо мне" */
+        .bio {
+            margin-bottom: 2rem;
+            background: #f9fafc;
+            padding: 1.4rem 1.8rem;
+            border-radius: 1.5rem;
+            border: 1px solid #eef2f9;
+        }
+
+        .bio h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f3b4c;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .bio h2 i {
+            color: #3a6b8c;
+            font-size: 1.4rem;
+        }
+
+        .bio p {
+            color: #2c4255;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .bio p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Сетка навыков и интересов */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: #ffffff;
+            border-radius: 1.3rem;
+            padding: 1.3rem 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
+            border: 1px solid #eef2f8;
+            transition: all 0.2s;
+        }
+
+        .info-card:hover {
+            border-color: #cddfea;
+            box-shadow: 0 12px 20px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .info-card h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: #1e3b4a;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.65rem;
+        }
+
+        .skill-tag {
+            background: #eef3fc;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #1f6392;
+            transition: 0.1s;
+        }
+
+        .interest-list {
+            list-style: none;
+        }
+
+        .interest-list li {
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 0.95rem;
+        }
+
+        .interest-list li i {
+            width: 1.6rem;
+            color: #3a7ca5;
+        }
+
+        /* Контакты и соцсети */
+        .contact-block {
+            background: linear-gradient(120deg, #ffffff, #fefefe);
+            border-radius: 1.3rem;
+            padding: 1.3rem 1.5rem;
+            border: 1px solid #eef2f8;
+            margin-bottom: 1.2rem;
+        }
+
+        .contact-block h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: flex-start;
+        }
+
+        .contact-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: #f2f5fa;
+            padding: 0.6rem 1.2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            color: #1f3b4c;
+            font-weight: 500;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .contact-item i {
+            font-size: 1.2rem;
+            width: 1.4rem;
+            color: #2c6b8f;
+        }
+
+        .contact-item:hover {
+            background: #e6edf5;
+            border-color: #cbdde9;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer-note {
+            text-align: center;
+            margin-top: 1.8rem;
+            font-size: 0.8rem;
+            color: #6f8eaa;
+            border-top: 1px solid #e2eaf1;
+            padding-top: 1.6rem;
+        }
+
+        /* Адаптивность для мобильных */
+        @media (max-width: 700px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+                gap: 1.2rem;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .hero {
+                padding: 2rem 1rem 3rem 1rem;
+            }
+            .avatar {
+                width: 110px;
+                height: 110px;
+            }
+            .avatar i {
+                font-size: 4rem;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="profile-card">
+        <!-- Верхняя часть с аватаркой -->
+        <div class="hero">
+            <div class="avatar">
+                <!-- Иконка пользователя (можно заменить на фото) -->
+                <i class="fas fa-user-astronaut"></i>
+            </div>
+            <h1>Иван Иванов</h1>
+            <div class="hero-tag">
+                <i class="fas fa-code"></i> Веб-разработчик & дизайнер
+            </div>
+        </div>
+
+        <div class="content">
+            <!-- Блок "О себе" -->
+            <div class="bio">
+                <h2><i class="fas fa-user-alt"></i> Обо мне</h2>
+                <p>Привет! Меня зовут Иван, я веб-разработчик с опытом создания современных, адаптивных и быстрых сайтов. Люблю превращать сложные задачи в элегантные интерфейсы. Постоянно учусь новому и слежу за трендами в IT.</p>
+                <p>В свободное время создаю пет-проекты, пишу статьи о фронтенде и веду небольшой блог. Верю, что лучший код — тот, который понятен и через год.</p>
+            </div>
+
+            <!-- Навыки и Интересы (сетка) -->
+            <div class="grid-2col">
+                <!-- Профессиональные навыки -->
+                <div class="info-card">
+                    <h3><i class="fas fa-cogs"></i> Навыки</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">HTML5/CSS3</span>
+                        <span class="skill-tag">JavaScript (ES6+)</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Vue.js</span>
+                        <span class="skill-tag">Node.js</span>
+                        <span class="skill-tag">Git & GitHub</span>
+                        <span class="skill-tag">Figma</span>
+                        <span class="skill-tag">Адаптивная верстка</span>
+                    </div>
+                </div>
+
+                <!-- Интересы -->
+                <div class="info-card">
+                    <h3><i class="fas fa-heart"></i> Интересы</h3>
+                    <ul class="interest-list">
+                        <li><i class="fas fa-robot"></i> Искусственный интеллект</li>
+                        <li><i class="fas fa-camera-retro"></i> Фотография и путешествия</li>
+                        <li><i class="fas fa-book-open"></i> Книги и саморазвитие</li>
+                        <li><i class="fas fa-chess-queen"></i> Шахматы / Стратегии</li>
+                        <li><i class="fas fa-music"></i> Электронная музыка</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Контакты + соцсети -->
+            <div class="contact-block">
+                <h3><i class="fas fa-address-card"></i> Контакты</h3>
+                <div class="contact-methods">
+                    <a href="mailto:ivan.work@example.com" class="contact-item">
+                        <i class="fas fa-envelope"></i> ivan.work@example.com
+                    </a>
+                    <a href="tel:+71234567890" class="contact-item">
+                        <i class="fas fa-phone-alt"></i> +7 (123) 456-78-90
+                    </a>
+                    <a href="#" class="contact-item" target="_blank">
+                        <i class="fab fa-telegram"></i> Telegram
+                    </a>
+                    <a href="#" class="contact-item" target="_blank">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                    <a href="#" class="contact-item" target="_blank">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+                </div>
+            </div>
+
+            <!-- Дополнительный блок для портфолио / ссылки -->
+            <div class="contact-block" style="background: #fafdff;">
+                <h3><i class="fas fa-folder-open"></i> Портфолио</h3>
+                <div class="contact-methods">
+                    <a href="#" class="contact-item" style="background: #eef2fa;">
+                        <i class="fas fa-globe"></i> Мой личный сайт
+                    </a>
+                    <a href="#" class="contact-item" style="background: #eef2fa;">
+                        <i class="fab fa-behance"></i> Behance
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                <i class="far fa-copyright"></i> 2025 Иван Иванов — всегда открыт для интересных проектов
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

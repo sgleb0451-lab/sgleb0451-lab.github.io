@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Современный лендинг — Увеличим ваш бизнес</title>
+    <!-- Подключаем шрифты Google Fonts для современного вида -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (иконки) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff;
+            color: #1A1E2B;
+            line-height: 1.4;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* типографика */
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        h1 {
+            font-size: clamp(2.8rem, 6vw, 4.5rem);
+            margin-bottom: 24px;
+        }
+        h2 {
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            text-align: center;
+            margin-bottom: 16px;
+        }
+        .section-subtitle {
+            text-align: center;
+            color: #4B5565;
+            font-size: 1.2rem;
+            margin-bottom: 56px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+        }
+        .btn-primary {
+            background: #2C3FE0;
+            color: white;
+            box-shadow: 0 8px 18px rgba(44, 63, 224, 0.25);
+        }
+        .btn-primary:hover {
+            background: #1f2eb3;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(44, 63, 224, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid #2C3FE0;
+            color: #2C3FE0;
+        }
+        .btn-outline:hover {
+            background: #2C3FE0;
+            color: white;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #2C3FE0, #00B4AA);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .nav a {
+            margin-left: 32px;
+            text-decoration: none;
+            color: #2D3A4B;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav a:hover {
+            color: #2C3FE0;
+        }
+
+        /* HERO секция */
+        .hero {
+            padding: 80px 0 80px 0;
+        }
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 48px;
+            flex-wrap: wrap;
+        }
+        .hero-content {
+            flex: 1.2;
+        }
+        .hero-badge {
+            background: #EFF3FF;
+            color: #2C3FE0;
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #4B5565;
+            margin: 24px 0 32px;
+            max-width: 90%;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .hero-image {
+            flex: 1;
+            background: linear-gradient(145deg, #F0F4FF, #E6ECFE);
+            border-radius: 40px;
+            padding: 40px 20px;
+            text-align: center;
+            font-size: 6rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.05);
+        }
+
+        /* преимущества */
+        .benefits {
+            padding: 80px 0;
+            background: #F9FAFE;
+        }
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 32px;
+            padding: 32px 24px;
+            transition: all 0.3s;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.02);
+            border: 1px solid #eef2f9;
+            text-align: center;
+        }
+        .card i {
+            font-size: 2.8rem;
+            color: #2C3FE0;
+            margin-bottom: 24px;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        .card p {
+            color: #5A6879;
+        }
+
+        /* тарифы / прайс */
+        .pricing {
+            padding: 80px 0;
+        }
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+        }
+        .price-item {
+            background: white;
+            border-radius: 32px;
+            padding: 32px;
+            border: 1px solid #E9EDF2;
+            transition: 0.2s;
+        }
+        .price-item.featured {
+            border: 2px solid #2C3FE0;
+            background: #FEFEFE;
+            transform: scale(1.02);
+            box-shadow: 0 20px 35px -12px rgba(44,63,224,0.2);
+        }
+        .price-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        .price-cost {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin: 16px 0;
+        }
+        .price-cost span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #6C7A8E;
+        }
+        .price-list {
+            list-style: none;
+            margin: 24px 0;
+        }
+        .price-list li {
+            margin: 14px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .price-list i.fa-check {
+            color: #2C3FE0;
+        }
+
+        /* форма + CTA */
+        .cta {
+            background: #1A1E2B;
+            color: white;
+            border-radius: 48px;
+            margin: 0 24px 80px 24px;
+            padding: 64px 48px;
+        }
+        .cta-inner {
+            max-width: 700px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .cta h2 {
+            color: white;
+        }
+        .cta p {
+            margin-bottom: 32px;
+            opacity: 0.8;
+        }
+        .form-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+        .form-group input {
+            flex: 1;
+            min-width: 220px;
+            padding: 14px 18px;
+            border-radius: 60px;
+            border: none;
+            font-size: 1rem;
+            background: white;
+        }
+        .form-group button {
+            background: #2C3FE0;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid #EDF2F7;
+            color: #5f6c80;
+        }
+
+        /* анимация появления */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .hero-grid {
+                flex-direction: column;
+            }
+            .hero-content p {
+                max-width: 100%;
+            }
+            .nav {
+                display: none;
+            }
+            .cta {
+                margin: 0 16px 60px 16px;
+                padding: 40px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container header-flex">
+        <div class="logo">Lead<span style="color:#2C3FE0;">Gen</span></div>
+        <div class="nav">
+            <a href="#benefits">Преимущества</a>
+            <a href="#pricing">Тарифы</a>
+            <a href="#contact">Контакты</a>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- HERO секция -->
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content fade-up">
+                <div class="hero-badge">🔥 Только до конца месяца — скидка 20%</div>
+                <h1>Увеличим продажи <br>с помощью <span style="color:#2C3FE0;">продающего сайта</span></h1>
+                <p>Готовый лендинг, который конвертирует до 15% трафика в лиды. Никакой сложной настройки — просто результат.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Заказать расчёт →</a>
+                    <a href="#pricing" class="btn btn-outline">Выбрать тариф</a>
+                </div>
+            </div>
+            <div class="hero-image fade-up">
+                <i class="fas fa-chart-line"></i> <br>
+                <span style="font-size: 1rem; font-weight: 500;">📈 Конверсия +38%</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Блок преимуществ -->
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <h2 class="fade-up">Почему выбирают нас</h2>
+            <div class="section-subtitle fade-up">Создаём лендинги, которые продают 24/7</div>
+            <div class="cards-grid">
+                <div class="card fade-up">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Высокая скорость</h3>
+                    <p>Страницы загружаются до 0,9 секунд — важный фактор ранжирования и удержания.</p>
+                </div>
+                <div class="card fade-up">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Адаптивный дизайн</h3>
+                    <p>Идеально смотрится на любых экранах: от iPhone до 4K мониторов.</p>
+                </div>
+                <div class="card fade-up">
+                    <i class="fas fa-chart-simple"></i>
+                    <h3>Готовые интеграции</h3>
+                    <p>CRM, чаты, аналитика — подключаем за 1 день, вы получаете лиды сразу.</p>
+                </div>
+                <div class="card fade-up">
+                    <i class="fas fa-headset"></i>
+                    <h3>Поддержка 24/7</h3>
+                    <p>Правки, хостинг, обновления — мы всегда на связи.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Тарифы -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="fade-up">Гибкие тарифы</h2>
+            <div class="section-subtitle fade-up">Выберите решение под ваш бюджет и задачи</div>
+            <div class="price-grid">
+                <div class="price-item fade-up">
+                    <div class="price-name">Start</div>
+                    <div class="price-cost">28 900 ₽ <span>/ проект</span></div>
+                    <ul class="price-list">
+                        <li><i class="fas fa-check"></i> Одностраничный сайт</li>
+                        <li><i class="fas fa-check"></i> Форма захвата + карта</li>
+                        <li><i class="fas fa-check"></i> Адаптивная вёрстка</li>
+                        <li><i class="fas fa-check"></i> Базовая SEO настройка</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" style="width:100%; text-align:center;">Выбрать</a>
+                </div>
+                <div class="price-item featured fade-up">
+                    <div class="price-name">Business</div>
+                    <div class="price-cost">59 500 ₽ <span>/ проект</span></div>
+                    <ul class="price-list">
+                        <li><i class="fas fa-check"></i> Все из Start +</li>
+                        <li><i class="fas fa-check"></i> Анимации и микро-взаимодействия</li>
+                        <li><i class="fas fa-check"></i> Интеграция с CRM / Telegram</li>
+                        <li><i class="fas fa-check"></i> A/B тестирование гипотез</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="width:100%; text-align:center;">Связаться</a>
+                </div>
+                <div class="price-item fade-up">
+                    <div class="price-name">Premium</div>
+                    <div class="price-cost">89 900 ₽ <span>/ под ключ</span></div>
+                    <ul class="price-list">
+                        <li><i class="fas fa-check"></i> Business + конструктор личных кабинетов</li>
+                        <li><i class="fas fa-check"></i> Продвинутая аналитика</li>
+                        <li><i class="fas fa-check"></i> 6 месяцев техподдержки</li>
+                        <li><i class="fas fa-check"></i> Приоритетная доработка</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline" style="width:100%; text-align:center;">Обсудить</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНТАКТ + форма лидогенерации -->
+    <section id="contact">
+        <div class="cta fade-up">
+            <div class="cta-inner">
+                <h2>Готовы увеличить прибыль?</h2>
+                <p>Оставьте заявку, и наш менеджер подготовит индивидуальное предложение с примером дизайна в течение 1 часа.</p>
+                <form id="leadForm">
+                    <div class="form-group">
+                        <input type="text" id="nameInput" placeholder="Ваше имя" required>
+                        <input type="tel" id="phoneInput" placeholder="+7 (___) ___-__-__" required>
+                        <button type="submit" id="submitBtn">Получить предложение →</button>
+                    </div>
+                    <p style="font-size: 0.75rem; margin-top: 16px; opacity: 0.6;">Никакого спама, только полезная информация</p>
+                </form>
+                <div id="formMessage" style="margin-top: 20px; font-weight: 500;"></div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 LeadGen — лендинги, которые приносят клиентов. <i class="fas fa-heart" style="color:#2C3FE0;"></i></p>
+    </div>
+</footer>
+
+<script>
+    // Плавное появление при скролле
+    const fadeElements = document.querySelectorAll('.fade-up');
+
+    const appearOnScroll = function() {
+        fadeElements.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (rect.top < windowHeight - 100) {
+                el.classList.add('appear');
+            }
+        });
+    };
+    window.addEventListener('scroll', appearOnScroll);
+    appearOnScroll(); // запуск сразу
+
+    // Обработка формы (имитация отправки лида)
+    const form = document.getElementById('leadForm');
+    const msgDiv = document.getElementById('formMessage');
+
+    form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('nameInput').value.trim();
+        const phone = document.getElementById('phoneInput').value.trim();
+
+        if(!name || !phone) {
+            msgDiv.innerHTML = '<span style="color: #ffb8b8;">❌ Пожалуйста, заполните имя и телефон</span>';
+            return;
+        }
+
+        const submitBtn = document.getElementById('submitBtn');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+
+        // Имитация AJAX запроса (можно заменить на реальный fetch)
+        setTimeout(() => {
+            console.log('Лид отправлен:', { name, phone });
+            msgDiv.innerHTML = '<span style="color: #b9ffb9;">✅ Спасибо! Мы свяжемся с вами в ближайшее время.</span>';
+            form.reset();
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Получить предложение →';
+            // Можно также отправить данные на ваш сервер через fetch
+            // fetch('/api/lead', { method: 'POST', body: JSON.stringify({name, phone}), ... })
+        }, 800);
+    });
+</script>
+</body>
+</html>
